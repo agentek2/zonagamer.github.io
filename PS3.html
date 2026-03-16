@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATRIX + RULETA RESPONSIVA</title>
+
+<style>
+html,body{
+  margin:0;
+  padding:0;
+  background:black;
+  overflow:hidden;
+  width:100%;
+  height:100%;
+  font-family: monospace;
+}
+#container{position:relative;width:100vw;height:100vh;}
+#matrix{position:absolute;inset:0;z-index:1;}
+#rouletteContainer{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  z-index:3;display:flex;flex-direction:column;
+  align-items:center;gap:1vmin;width:90vmin;max-width:360px;
+}
+#pointer{
+  width:0;height:0;
+  border-left:2vmin solid transparent;
+  border-right:2vmin solid transparent;
+  border-top:3vmin solid red;
+}
+#roulette{width:80vmin;height:80vmin;max-width:300px;max-height:300px;}
+
+#options{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:1vmin;
+  width:100%;
+}
+
+#options input{
+  background:black;
+  border:1px solid #0f0;
+  color:#0f0;
+  padding:1vmin;
+  font-size:1.6vmin;
+}
+
+#powerBar{width:100%;height:1.2vmin;border:1px solid #0f0;}
+#powerFill{height:100%;width:0%;background:#0f0;}
+
+button{
+  padding:1vmin 3vmin;
+  background:black;
+  color:#0f0;
+  border:1px solid #0f0;
+  cursor:pointer;
+  touch-action:none;
+}
+
+button:disabled{
+  opacity:0.5;
+}
+
+#popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
+}
+
+#popupContent{
+  border:2px solid #0f0;
+  padding:4vmin;
+  background:black;
+  color:#0f0;
+  text-align:center;
+}
+
+#crack{
+  position:fixed;
+  inset:0;
+  background:repeating-linear-gradient(45deg,transparent 0 10px,rgba(255,255,255,.2) 10px 11px),
+             repeating-linear-gradient(-45deg,transparent 0 14px,rgba(255,255,255,.15) 14px 15px);
+  display:none;
+  z-index:9;
+}
+
+@media (max-width:768px){
+
+html,body{overflow:auto;}
+
+#container{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content: center;
+height:auto;
+min-height:100vh;
+}
+
+#rouletteContainer{
+position:relative;
+transform:none;
+top:auto;
+left:auto;
+width:95vw;
+margin-top:2vh;
+}
+
+#roulette{
+width:80vw;
+height:80vw;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<div id="container">
+<canvas id="matrix"></canvas>
+
+<div id="rouletteContainer">
+
+<div id="pointer"></div>
+
+<canvas id="roulette"></canvas>
+
+<div id="options">
+
+<input placeholder="30 min gratis en PS3">
+<input placeholder="1 hora en PS3 pagando solo 30 min">
+
+<input placeholder="15 min gratis en PS3">
+<input placeholder="30 min en PS4 Pro pagando solo 15 min">
+
+<input placeholder="20 min gratis en PS4 Pro">
+<input placeholder="Gira otra vez">
+
+<input placeholder="15 min gratis en PS4 Pro">
+<input placeholder="20 min extra en tu próxima visita">
+
+<input placeholder="20 min gratis en PS5 Pro">
+<input placeholder="no ganaste nada">
+
+</div>
+
+<div id="powerBar"><div id="powerFill"></div></div>
+
+<button id="spinBtn">GIRAR</button>
+
+</div>
+</div>
+
+<div id="crack"></div>
+
+<div id="popup">
+<div id="popupContent">
+<h2 id="winnerText"></h2>
+<button id="continueBtn">CONTINUAR</button>
+</div>
+</div>
+
+<audio id="spinSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7d8bff88c9.mp3"></audio>
+<audio id="endSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_86458b5c54.mp3"></audio>
+
+<script>
+
+
+const m=document.getElementById("matrix")
+const mctx=m.getContext("2d")
+
+function resizeM(){
+m.width=window.innerWidth
+m.height=window.innerHeight
+initDrops()
+}
+
+window.addEventListener("resize",resizeM)
+
+const chars="01ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*"
+let drops=[]
+
+function initDrops(){
+drops=Array(Math.floor(m.width/16)).fill(0)
+}
+
+resizeM()
+
+function matrix(){
+
+mctx.fillStyle="rgba(0,0,0,.1)"
+mctx.fillRect(0,0,m.width,m.height)
+
+mctx.font="16px monospace"
+
+drops.forEach((y,i)=>{
+
+mctx.fillStyle="#0f0"
+
+mctx.fillText(chars[Math.random()*chars.length|0],i*16,y*16)
+
+drops[i]=y*16>m.height&&Math.random()>.975?0:y+1
+
+})
+
+requestAnimationFrame(matrix)
+
+}
+
+matrix()
+
+
+
+const r=document.getElementById("roulette")
+const ctx=r.getContext("2d")
+
+let angle=0
+let speed=0.002
+let extraSpeed=0
+let friction=0.985
+
+let forceSpin=false
+let paused=false
+let waitTimer=null
+
+function resizeR(){
+
+const rect=r.getBoundingClientRect()
+
+const size=Math.min(rect.width,rect.height)
+
+r.width=size
+r.height=size
+
+}
+
+window.addEventListener("resize",resizeR)
+
+resizeR()
+
+function opts(){
+
+return [...document.querySelectorAll("#options input")]
+
+.map(i=>i.value.trim()||i.placeholder.trim())
+
+.filter(Boolean)
+
+}
+
+
+
+function drawText(text,rad){
+
+let words=text.split(" ")
+
+let lines=[]
+
+let line=""
+
+ctx.font=rad*.09+"px monospace"
+
+let maxWidth=rad*.7
+
+for(let n=0;n<words.length;n++){
+
+let test=line+words[n]+" "
+
+let w=ctx.measureText(test).width
+
+if(w>maxWidth && n>0){
+
+lines.push(line)
+
+line=words[n]+" "
+
+}else{
+
+line=test
+
+}
+
+}
+
+lines.push(line)
+
+lines.forEach((l,i)=>{
+
+ctx.fillText(l.trim(),rad*.55,(i*rad*.09))
+
+})
+
+}
+
+function draw(){
+
+const o=opts()
+
+const rad=r.width/2
+
+ctx.clearRect(0,0,r.width,r.height)
+
+if(!paused){
+
+angle+=speed+extraSpeed
+
+extraSpeed*=friction
+
+}
+
+if(extraSpeed<0.0001 && forceSpin){
+
+forceSpin=false
+
+pauseOnWinner()
+
+}
+
+ctx.save()
+
+ctx.translate(rad,rad)
+
+ctx.rotate(angle)
+
+const slice=Math.PI*2/o.length
+
+o.forEach((t,i)=>{
+
+ctx.beginPath()
+
+ctx.moveTo(0,0)
+
+ctx.arc(0,0,rad*.9,i*slice,(i+1)*slice)
+
+ctx.closePath()
+
+ctx.fillStyle=`hsl(${i*360/o.length},100%,50%)`
+
+ctx.fill()
+
+ctx.strokeStyle="#00ff66"
+
+ctx.lineWidth=rad*.015
+
+ctx.stroke()
+
+ctx.save()
+
+ctx.rotate(i*slice+slice/2)
+
+ctx.fillStyle="#000"
+
+ctx.textAlign="center"
+
+drawText(t,rad)
+
+ctx.restore()
+
+})
+
+ctx.restore()
+
+requestAnimationFrame(draw)
+
+}
+
+draw()
+
+
+
+const btn=document.getElementById("spinBtn")
+
+const fill=document.getElementById("powerFill")
+
+const spinSound=document.getElementById("spinSound")
+
+const endSound=document.getElementById("endSound")
+
+let power=0
+
+let intv=null
+
+let cargando=false
+
+let bloqueado=false
+
+function iniciarFuerza(){
+
+if(bloqueado)return
+
+clearTimeout(waitTimer)
+
+paused=false
+
+power=0
+
+cargando=true
+
+clearInterval(intv)
+
+intv=setInterval(()=>{
+
+if(power<100&&cargando){
+
+power++
+
+fill.style.width=power+"%"
+
+}
+
+},20)
+
+}
+
+function soltarFuerza(){
+
+if(!cargando||bloqueado)return
+
+cargando=false
+
+bloqueado=true
+
+btn.disabled=true
+
+clearInterval(intv)
+
+fill.style.width="0%"
+
+extraSpeed=0.25*(power/100)
+
+forceSpin=true
+
+spinSound.currentTime=0
+
+spinSound.play()
+
+const desbloquear=setInterval(()=>{
+
+if(!forceSpin&&extraSpeed<0.0001){
+
+bloqueado=false
+
+btn.disabled=false
+
+clearInterval(desbloquear)
+
+}
+
+},100)
+
+}
+
+btn.addEventListener("mousedown",e=>{e.preventDefault();iniciarFuerza()})
+
+document.addEventListener("mouseup",soltarFuerza)
+
+btn.addEventListener("touchstart",e=>{e.preventDefault();iniciarFuerza()},{passive:false})
+
+document.addEventListener("touchend",e=>{e.preventDefault();soltarFuerza()},{passive:false})
+
+
+
+function winner(){
+
+const o=opts()
+
+const slice=Math.PI*2/o.length
+
+const n=(angle%(Math.PI*2)+Math.PI*2)%(Math.PI*2)
+
+const p=(3*Math.PI/2-n+Math.PI*2)%(Math.PI*2)
+
+return o[Math.floor(p/slice)]
+
+}
+
+function pauseOnWinner(){
+
+paused=true
+
+endSound.play()
+
+winnerText.textContent="Resultado: "+winner()
+
+popup.style.display="flex"
+
+crack.style.display="block"
+
+waitTimer=setTimeout(()=>{
+
+closePopup()
+
+},60000)
+
+}
+
+function closePopup(){
+
+popup.style.display="none"
+
+crack.style.display="none"
+
+}
+
+const continueBtn=document.getElementById("continueBtn")
+
+continueBtn.addEventListener("click",closePopup)
+
+continueBtn.addEventListener("touchstart",closePopup)
+
+</script>
+
+</body>
+</html>
