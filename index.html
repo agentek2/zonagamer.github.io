@@ -10,13 +10,10 @@ html,body{
   margin:0;
   padding:0;
   background:black;
-  overflow:hidden;
-  width:100%;
-  height:100%;
-  font-family: monospace;
+  overflow:auto;
 }
-#container{position:relative;width:100vw;height:100vh;}
-#matrix{position:absolute;inset:0;z-index:1;}
+#container{position:relative;width:100%;height:100vh;}
+#matrix{position:absolute;inset:0;z-index:1;width:100%;}
 #rouletteContainer{
   position:absolute;top:50%;left:50%;
   transform:translate(-50%,-50%);
@@ -92,10 +89,7 @@ button:disabled{
   z-index:9;
 }
 
-
-
 .titulo{
-
   z-index: 10;
   color: white;
   font-size: 20px;
@@ -113,9 +107,10 @@ input::placeholder {
 
 #container{
   display: flex;
+  height: auto;
 }
 
-@media (max-width: 1000px){
+@media (max-width: 768px){
 .titulo{
   position: relative;
   z-index: 10;
@@ -132,6 +127,8 @@ input::placeholder {
 
 #container{
   display: flex;
+  width: 100%;
+  height: 100vh;
 }
 
 }
@@ -193,7 +190,7 @@ height:80vw;
     to  { background-position: -6000px 0; }
 }
 
-@media (max-width: 1000px){
+@media (max-width: 768px){
 .sprite{
     position:absolute;
     left:50%;
@@ -213,8 +210,7 @@ height:80vw;
 .products{
   width: 100%;
   height: 100vh;
-  background-color: aqua;
-
+  background:aqua;
 }
 
 </style>
@@ -235,20 +231,20 @@ height:80vw;
 
 <div id="options">
 
-<input placeholder="30 min gratis en PS3">
-<input placeholder="20 min extra en tu próxima visita">
+<input placeholder="30 min gratis en PS3" readonly>
+<input placeholder="20 min extra en tu próxima visita" readonly>
 
-<input placeholder="1 hora en PS4 pro pagando 15 min">
-<input placeholder="30 min gratis en PS4 Pro">
+<input placeholder="1 hora en PS4 pro pagando 15 min" readonly>
+<input placeholder="30 min gratis en PS4 Pro" readonly>
 
-<input placeholder="20 min gratis en PS4 Pro">
-<input placeholder="Gira otra vez">
+<input placeholder="20 min gratis en PS4 Pro" readonly>
+<input placeholder="Gira otra vez" readonly>
 
-<input placeholder="15 min gratis en PS4 Pro">
-<input placeholder="1 doritos">
+<input placeholder="15 min gratis en PS4 Pro" readonly>
+<input placeholder="1 doritos" readonly>
 
-<input placeholder="30 min gratis en PS5 Pro">
-<input placeholder="no ganaste nada">
+<input placeholder="30 min gratis en PS5 Pro" readonly>
+<input placeholder="no ganaste nada" readonly>
 
 </div>
 
