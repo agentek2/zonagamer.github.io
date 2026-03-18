@@ -89,17 +89,50 @@ button:disabled{
   z-index:9;
 }
 
+.titulo{
+  z-index: 10;
+  color: white;
+  font-size: 20px;
+  height:100vh;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#container{
+  display: flex;
+}
+
+@media (max-width: 1000px){
+.titulo{
+  z-index: 10;
+  color: white;
+  font-size: 20px;
+  height: 0vh;
+  width: 100%;
+  margin: 24px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#container{
+  display: flex;
+}
+
+}
+
 @media (max-width:768px){
 
 html,body{overflow:auto;}
 
 #container{
-display:flex;
 flex-direction:column;
 align-items:center;
 justify-content: center;
 height:auto;
-min-height:100vh;
+min-height:67vh;
 }
 
 #rouletteContainer{
@@ -117,12 +150,61 @@ height:80vw;
 }
 
 }
+
+/* animacion */
+
+.sprite{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(85%,-50%);
+    z-index: 11;
+    width:300px;
+    height:350px;
+
+    background-image:url("/zonagamer/img/sprite-animal-bird.png");
+    background-repeat:no-repeat;
+    background-size:auto 100%;
+
+    animation: bird_amb 2s steps(20) infinite;
+}
+
+
+@keyframes bird_amb{
+    from{ background-position: 0 0; }
+    to  { background-position: -6000px 0; }
+}
+
+
+@keyframes baile{
+    from{ background-position: -3900px 0; }
+    to  { background-position: -6000px 0; }
+}
+
+@media (max-width: 1000px){
+.sprite{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,59%) scale(0.6);
+    z-index: 11;
+    width:300px;
+    height:350px;
+    background-image:url("/zonagamer/img/sprite-animal-bird.png");
+    background-repeat:no-repeat;
+    background-size:auto 100%;
+    animation: bird_amb 2s steps(20) infinite;
+}
+
+}
 </style>
 </head>
 
 <body>
 
 <div id="container">
+
+  <div class="titulo"><h1>ZONA GAMER</h1></div>
 <canvas id="matrix"></canvas>
 
 <div id="rouletteContainer">
@@ -155,7 +237,12 @@ height:80vw;
 <button id="spinBtn">GIRAR</button>
 
 </div>
+<!-- imagen -->
+<div class="sprite" id="bird"></div>
+
 </div>
+<!-- animacion -->
+
 
 <div id="crack"></div>
 
