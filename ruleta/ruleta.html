@@ -3,18 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="ojos.ico">
 <title>ZONA GAMER</title>
 
 <style>
-
-  *{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
-
 html,body{
   margin:0;
   padding:0;
@@ -181,7 +172,7 @@ height:80vw;
     z-index: 11;
     width:300px;
     height:350px;
-    background-image:url("sprite-animal-bird.png");
+    background-image:url("img/sprite-animal-bird.png");
     background-repeat:no-repeat;
     background-size:auto 100%;
     animation: bird_amb 2s steps(20) infinite;
@@ -208,7 +199,7 @@ height:80vw;
     z-index: 11;
     width:300px;
     height:350px;
-    background-image:url("sprite-animal-bird.png");
+    background-image:url("img/sprite-animal-bird.png");
     background-repeat:no-repeat;
     background-size:auto 100%;
     animation: bird_amb 2s steps(20) infinite;
@@ -225,7 +216,7 @@ height:80vw;
     width:300px;
     padding: 0px 36px;
     height:350px;
-    background-image:url("oo.png");
+    background-image:url("img/oo.png");
     background-repeat:no-repeat;
     background-size:auto 100%;
    
@@ -242,265 +233,16 @@ height:80vw;
     width:289px;
     height:350px;
     background-repeat:no-repeat;
-    background-image:url("oo.png");
+    background-image:url("img/oo.png");
     background-size:auto 100%;
 } 
 }
 
-.products{
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  background:rgb(0, 0, 0);
-}
-
-.home{
-  display: flex;
-  width: 100%;
-  height: 100vh;
-  background:rgb(0, 0, 0);
-  min-height: 100vh;
-  position: relative;
-}
-
-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
-  object-fit: cover;
-}
-
-.capa{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #1c1c1d;
-  opacity: 0.5;
-  mix-blend-mode: overlay;
-}
-
-.titu{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 60%;
-  margin: auto;
-  position: relative;
-  z-index: 2;
-}
-
-@media (max-width: 768px){
-  .home{
-  display: flex;
-  width: 100%;
-  height: 100vh;
-  background:rgb(0, 0, 0);
-  min-height: 100vh;
-  position: relative;
-}
-
-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
-  object-fit: cover;
-}
-
-.capa{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #1c1c1d;
-  opacity: 0.5;
-  mix-blend-mode: overlay;
-}
-
-.titu{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 60%;
-  margin: auto;
-  position: relative;
-  z-index: 2;
-}
-}
-
-
-
-nav{
-  background-color: #000;
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.nav-container{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.logo{
-  color: #fff;
-  font-weight: bold;
-  font-size: 1.5rem;
-  text-decoration: none;
-}
-
-.nav-links{
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-  transition: all 0.3s ease;
-}
-
-.nav-links a{
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.2s;
-}
-
-.nav-links a:hover{
-  opacity: 0.8;
-  transform: translateY(-2px);
-}
-
-.menu-btn{
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: none;
-}
-
-/* Responsive */
-@media (max-width: 768px){
-
-  .menu-btn{
-    display: block;
-    z-index: 1111;
-  }
-
-  .nav-links{
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    background: #000;
-    flex-direction: column;
-    text-align: center;
-    padding: 1rem 0;
-    clip-path: circle(0px at 90% -10%);
-    pointer-events: none;
-    transition: all 0.5s ease;
-    z-index: 999;
-  }
-
-  .nav-links.active{
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    clip-path: circle(1000px at 90% -10%);
-    pointer-events: all;
-    z-index: 1000;
-  }
-
-  .nav-links li{
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-  }
-
-  .nav-links.active li{
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .nav-links li:nth-child(1){transition-delay:0.1s;}
-  .nav-links li:nth-child(2){transition-delay:0.1s;}
-  .nav-links li:nth-child(3){transition-delay:0.1s;}
-  .nav-links li:nth-child(4){transition-delay:0.1s;}
-
-}
-
-nav{
-  position: relative;
-  z-index: 1001;
-}
 
 </style>
 </head>
+
 <body>
-<header>
-<nav>
-<div class="nav-container">
-<a href="#" class="logo" style="color:white;">Zona Gamer</a>
-
-<button class="menu-btn" id="menuBtn">☰</button>
-
-<ul class="nav-links" id="navLinks">
-<li><a href="#">Inicio</a></li>
-<li><a href="#">Servicio</a></li>
-<li><a href="#">Portafolio</a></li>
-<li><a href="#">Contacto</a></li>
-</ul>
-
-</div>
-</nav>
-</header>
-<script>
-const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.getElementById("navLinks");
-const links = navLinks.querySelectorAll("a");
-
-menuBtn.addEventListener("click", () =>{
-
-  navLinks.classList.toggle("active");
-
-  if(navLinks.classList.contains("active")){
-    menuBtn.innerHTML = "✖";
-    menuBtn.setAttribute("aria-expanded","true")
-  }else{
-    menuBtn.innerHTML = "☰";
-    menuBtn.setAttribute("aria-expanded","false")
-  }
-
-});
-
-links.forEach(link => {
-  link.addEventListener("click",() => {
-    navLinks.classList.remove("active");
-    menuBtn.innerHTML = "☰";
-    menuBtn.setAttribute("aria-expanded","false")
-  })
-});
-
-</script>
-<section class="home">
-  <div class="titu">
-    <h1>DOTA 2</h1>
-    <P>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur eum veritatis dolore ipsam commodi voluptatum nobis at cum, quo, suscipit dolorem ex vitae consequatur numquam dolor veniam debitis laboriosam est.</P>
-  </div>
-<video muted autoplay loop>
-  <source src="mp4/home.mp4" type="video/mp4">
-</video>
-<div class="capa"></div>
-</section>
 
 <div id="container">
 
@@ -553,10 +295,6 @@ links.forEach(link => {
 
 <audio id="spinSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7d8bff88c9.mp3"></audio>
 <audio id="endSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_86458b5c54.mp3"></audio>
-
-<section class="products">
-
-</section>
 
 <script>
 
