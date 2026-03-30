@@ -62,9 +62,9 @@ header ul li a{
 
 header ul li a:hover ,
 header ul li a.active {
-  background: rgb(0, 255, 234);
-  padding: 20px;
-  margin: 20px;
+  background: rgb(189, 197, 165);
+  padding: 10px;
+  margin: 10px;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -284,7 +284,9 @@ video {
 .bebidas{
     width: 100%;
     height: 100vh;
-    display: flex;   
+    display: flex; 
+    margin: 10px 0px;
+    padding: 0px 10px;
 }
 
 .izquierda{
@@ -352,13 +354,15 @@ text-align: center;
 }
 
 .con{
+   margin: 10px 10px;
     font-size: 24px;
-    padding: 30px 20px;
+    padding: 0px 20px;
 }
 
 .extra{
+
     font-size: 14px;
-    padding: 30px 20px;
+    padding: 0px 0px;
 }
 }
 
@@ -368,6 +372,8 @@ text-align: center;
   width: 100%;
   height: 100vh;
   display: flex;
+   margin: 10px 0px;
+    padding: 0px 10px;
 }
 
 .izqui{
