@@ -18,13 +18,25 @@
 <header>
 <nav>
 <div class="nav-container">
-<a href="#" class="logo" style="color:white;"></a>
+<a href="index.html" class="logo">
+   <img src="img/log.png" style="width: 90px;">
+</a>
 <button class="menu-btn" id="menuBtn">☰</button>
+<audio id="menuMusic" loop>
+  <source src="mp3/0402.MP3" type="audio/mp3">
+</audio>
+
 <ul class="nav-links" id="navLinks">
+
+  <video loop autoplay muted class="minivideo video-menu"  id="menuVideo">
+  <source src="mp4/0402(1).mp4" type="video/mp4">
+</video>
+
+
 <li><a href="index.html">Inicio</a></li>
 <li><a href="ruleta/ruleta.html">Ruleta</a></li>
-<li><a href="#">Regalos</a></li>
-<li><a href="#">Ubicacion</a></li>
+<li><a href="#">Ofertas</a></li>
+<li><a href="ubicacion/mapa.html">Ubicacion</a></li>
 </ul>
 </div>
 </nav>
@@ -37,9 +49,11 @@
 </script>
  <!-- script del menu -->
 <script>
+
 const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
 const links = navLinks.querySelectorAll("a");
+const music = document.getElementById("menuMusic");
 
 menuBtn.addEventListener("click", () =>{
 
@@ -47,10 +61,18 @@ menuBtn.addEventListener("click", () =>{
 
   if(navLinks.classList.contains("active")){
     menuBtn.innerHTML = "✖";
-    menuBtn.setAttribute("aria-expanded","true")
+    menuBtn.setAttribute("aria-expanded","true");
+
+    // reproducir musica
+    music.play();
+
   }else{
     menuBtn.innerHTML = "☰";
-    menuBtn.setAttribute("aria-expanded","false")
+    menuBtn.setAttribute("aria-expanded","false");
+
+    // detener musica
+    music.pause();
+    music.currentTime = 0;
   }
 
 });
@@ -59,7 +81,10 @@ links.forEach(link => {
   link.addEventListener("click",() => {
     navLinks.classList.remove("active");
     menuBtn.innerHTML = "☰";
-    menuBtn.setAttribute("aria-expanded","false")
+    menuBtn.setAttribute("aria-expanded","false");
+
+    music.pause();
+    music.currentTime = 0;
   })
 });
 
@@ -69,11 +94,11 @@ links.forEach(link => {
 
  <section class="home">
   <div class="titu">
-    <h1>DOTA 2</h1>
-    <P>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur eum veritatis dolore ipsam commodi voluptatum nobis at cum, quo, suscipit dolorem ex vitae consequatur numquam dolor veniam debitis laboriosam est.</P>
+    <h1 style="font-size: 50px;">ZONA GAMER</h1>
+    <P style="font-size: 19px; margin: 1px -20px; padding: 20px 20px;">Ahora estamos mas conectados que nunca.</P>
   </div>
-<video muted autoplay loop>
-  <source src="mp4/home.mp4" type="video/mp4">
+<video muted autoplay loop id="mainVideo">
+  <source src="mp4/0330.mp4" type="video/mp4">
 </video>
 <div class="capa"></div>
 </section>
@@ -132,15 +157,10 @@ links.forEach(link => {
           <div class="box">
             <h2>¿Quiénes somos?</h2>
             <p>
-              Contamos con 11 años de experiencia en alquiler de vehículos
-              corporativos y particulares en Perú, ofrece calidad, integridad,
-              seguridad y compromiso. Flota versátil para minería, construcción,
-              traslados y turismo. Precios competitivos y atención 24/7.
+              Una empresa de videojuegos ofrece experiencias únicas de entretenimiento en consola, permitiendo a los jugadores sumergirse en mundos virtuales llenos de acción, aventura y competencia. A través de consolas de última generación, juegos variados y espacios diseñados para la comodidad, brinda la oportunidad de disfrutar solo o con amigos, vivir torneos, descubrir nuevos títulos y experimentar la emoción de jugar con el mejor rendimiento y calidad. 🎮🔥
             </p>
             <p>
-              para mas informacion comuniquese con nosotros enviandonos una
-              cotizacion desde nuetras pagina o visite tambien nuetras redes
-              sociales.
+              para mas informacion comuniquese con nosotros.
             </p>
           </div>
           <div class="box">
@@ -184,5 +204,6 @@ links.forEach(link => {
           >
         </div>
       </footer>
+      
 </body>
 </html>
