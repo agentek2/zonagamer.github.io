@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="icon" href="https://cdn.glitch.global/c8ae3563-7820-43f9-9f9d-9f7a9c05c680/Sin%20t%C3%ADtuloL.png?v=1686265807779" sizes="32x32" /> 
+    <link rel="icon" href="https://cdn.glitch.global/c8ae3563-7820-43f9-9f9d-9f7a9c05c680/Sin%20t%C3%ADtuloL.png?v=1686265807779" sizes="592x592" />
+    <link rel="apple-touch-icon" href="https://cdn.glitch.global/c8ae3563-7820-43f9-9f9d-9f7a9c05c680/Sin%20t%C3%ADtuloL.png?v=1686265807779" />
+    <meta name="msapplication-TileImage" content="logo3" />
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="icon" href="img/ojos.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Ubicacion</title>
+</head>
+
+<body>
+<header>
+<nav>
+<div class="nav-container">
+<a href="/index.html" class="logo">
+   <img src="img/log.png" style="width: 90px;">
+</a>
+<button class="menu-btn" id="menuBtn">☰</button>
+<audio id="menuMusic" loop>
+  <source src="mp3/0402.MP3" type="audio/mp3">
+</audio>
+
+<ul class="nav-links" id="navLinks">
+
+  <video loop autoplay muted class="minivideo video-menu"  id="menuVideo">
+  <source src="mp4/0402(1).mp4" type="video/mp4">
+</video>
+
+
+<li><a href="/index.html">Inicio</a></li>
+<li><a href="/ruleta/ruleta.html">Ruleta</a></li>
+<li><a href="/ofertas/ofertas.html">Ofertas</a></li>
+<li><a href="/ubicacion/mapa.html">Ubicacion</a></li>
+</ul>
+</div>
+</nav>
+</header>
+<script type="text/javascript">
+    window.addEventListener("scroll", function(){
+    var header = document.querySelector("header");
+    header.classList.toggle("abajo",window.scrollY>0);
+})
+</script>
+ <!-- script del menu -->
+<script>
+
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+const links = navLinks.querySelectorAll("a");
+const music = document.getElementById("menuMusic");
+
+menuBtn.addEventListener("click", () =>{
+
+  navLinks.classList.toggle("active");
+
+  if(navLinks.classList.contains("active")){
+    menuBtn.innerHTML = "✖";
+    menuBtn.setAttribute("aria-expanded","true");
+
+    // reproducir musica
+    music.play();
+
+  }else{
+    menuBtn.innerHTML = "☰";
+    menuBtn.setAttribute("aria-expanded","false");
+
+    // detener musica
+    music.pause();
+    music.currentTime = 0;
+  }
+
+});
+
+links.forEach(link => {
+  link.addEventListener("click",() => {
+    navLinks.classList.remove("active");
+    menuBtn.innerHTML = "☰";
+    menuBtn.setAttribute("aria-expanded","false");
+
+    music.pause();
+    music.currentTime = 0;
+  })
+});
+
+</script>
+
+
+<!-- mapas -->
+<section class="ubicacion">
+<div class="izquierda">
+
+</div>
+<div class="derecha">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d981.9057782149058!2d-76.20668343051702!3d-10.129903679174438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91a7ee3c6ad1e1cd%3A0x72cd205b00a610f4!2sJiron%20Progreso%20308%2C%20Ambo%2010421!5e0!3m2!1ses-419!2spe!4v1778942645386!5m2!1ses-419!2spe" width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>         
+</div>
+</section>
+
+</section>
+</body>
+</html>
