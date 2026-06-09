@@ -252,6 +252,8 @@ align-items: center;
 /* Cursor de mano */
 .fotos{
     cursor: pointer;
+    border-radius: 10px;
+    margin: 10px;
 }
 
 /* Fondo oscuro */
