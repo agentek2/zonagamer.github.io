@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="icon" href="https://cdn.glitch.global/c8ae3563-7820-43f9-9f9d-9f7a9c05c680/Sin%20t%C3%ADtuloL.png?v=1686265807779" sizes="32x32" /> 
+    <link rel="icon" href="https://cdn.glitch.global/c8ae3563-7820-43f9-9f9d-9f7a9c05c680/Sin%20t%C3%ADtuloL.png?v=1686265807779" sizes="592x592" />
+    <link rel="apple-touch-icon" href="https://cdn.glitch.global/c8ae3563-7820-43f9-9f9d-9f7a9c05c680/Sin%20t%C3%ADtuloL.png?v=1686265807779" />
+    <meta name="msapplication-TileImage" content="logo3" />
+    <link rel="stylesheet" href="ruleta/estilos.css">
+    <link rel="icon" href="img/ojos.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Ubicacion</title>
+</head>
+<body>
+<header>
+<nav>
+<div class="nav-container">
+<a href="index.html" class="logo">
+   <img src="img/log.png" style="width: 90px;">
+</a>
+<button class="menu-btn" id="menuBtn">☰</button>
+<audio id="menuMusic" loop>
+  <source src="mp3/0402.MP3" type="audio/mp3">
+</audio>
+
+<ul class="nav-links" id="navLinks">
+
+  <video loop autoplay muted class="minivideo video-menu"  id="menuVideo">
+  <source src="mp4/0402-1_fHw3YWVj.mp4" type="video/mp4">
+</video>
+
+
+<li><a href="index.html">Inicio</a></li>
+<li><a href="rule.html">Ruleta</a></li>
+<li><a href="ofertas.html">Ofertas</a></li>
+<li><a href="mapa.html">Ubicacion</a></li>
+</ul>
+</div>
+</nav>
+</header>
+<script type="text/javascript">
+    window.addEventListener("scroll", function(){
+    var header = document.querySelector("header");
+    header.classList.toggle("abajo",window.scrollY>0);
+})
+</script>
+ <!-- script del menu -->
+<script>
+
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+const links = navLinks.querySelectorAll("a");
+const music = document.getElementById("menuMusic");
+
+menuBtn.addEventListener("click", () =>{
+
+  navLinks.classList.toggle("active");
+
+  if(navLinks.classList.contains("active")){
+    menuBtn.innerHTML = "✖";
+    menuBtn.setAttribute("aria-expanded","true");
+
+    // reproducir musica
+    music.play();
+
+  }else{
+    menuBtn.innerHTML = "☰";
+    menuBtn.setAttribute("aria-expanded","false");
+
+    // detener musica
+    music.pause();
+    music.currentTime = 0;
+  }
+
+});
+
+links.forEach(link => {
+  link.addEventListener("click",() => {
+    navLinks.classList.remove("active");
+    menuBtn.innerHTML = "☰";
+    menuBtn.setAttribute("aria-expanded","false");
+
+    music.pause();
+    music.currentTime = 0;
+  })
+});
+
+</script>
+<section class="aqui">
+<div id="container">
+
+  <div class="titulo"><h1></h1></div>
+<canvas id="matrix"></canvas>
+
+<div id="rouletteContainer">
+
+<div id="pointer"></div>
+
+<canvas id="roulette"></canvas>
+
+<div id="options">
+
+<input placeholder="30 min gratis en PS3" readonly>
+<input placeholder="20 min extra en tu próxima visita" readonly>
+
+<input placeholder="1 hora en PS4 pro pagando 15 min" readonly>
+<input placeholder="30 min gratis en PS4 Pro" readonly>
+
+<input placeholder="20 min gratis en PS4 Pro" readonly>
+<input placeholder="Gira otra vez" readonly>
+
+<input placeholder="15 min gratis en PS4 Pro" readonly>
+<input placeholder="1 doritos" readonly>
+
+<input placeholder="30 min gratis en PS5 Pro" readonly>
+<input placeholder="no ganaste nada" readonly>
+
+</div>
+
+<div id="powerBar"><div id="powerFill"></div></div>
+
+<button id="spinBtn">GIRAR</button>
+
+</div>
+
+<div class="sprite" id="bird"></div>
+<div class="cesped" id="#"></div>
+</div>
+
+<div id="crack"></div>
+
+<div id="popup">
+<div id="popupContent">
+<h2 id="winnerText"></h2>
+<button id="continueBtn">CONTINUAR</button>
+</div>
+</div>
+</section>
+<audio id="spinSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7d8bff88c9.mp3"></audio>
+<audio id="endSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_86458b5c54.mp3"></audio>
+
+<script>
+const m=document.getElementById("matrix")
+const mctx=m.getContext("2d")
+
+function resizeM(){
+m.width=window.innerWidth
+m.height=window.innerHeight
+initDrops()
+}
+
+window.addEventListener("resize",resizeM)
+
+const chars="01ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*"
+let drops=[]
+
+function initDrops(){
+drops=Array(Math.floor(m.width/16)).fill(0)
+}
+
+resizeM()
+
+function matrix(){
+
+mctx.fillStyle="rgba(0,0,0,.1)"
+mctx.fillRect(0,0,m.width,m.height)
+
+mctx.font="16px monospace"
+
+drops.forEach((y,i)=>{
+
+mctx.fillStyle="#0f0"
+
+mctx.fillText(chars[Math.random()*chars.length|0],i*16,y*16)
+
+drops[i]=y*16>m.height&&Math.random()>.975?0:y+1
+
+})
+
+requestAnimationFrame(matrix)
+
+}
+
+matrix()
+</script>
+
+<script>
+  const r=document.getElementById("roulette")
+const ctx=r.getContext("2d")
+
+let angle=0
+let speed=0.002
+let extraSpeed=0
+let friction=0.985
+
+let forceSpin=false
+let paused=false
+let waitTimer=null
+
+function resizeR(){
+
+const rect=r.getBoundingClientRect()
+
+const size=Math.min(rect.width,rect.height)
+
+r.width=size
+r.height=size
+
+}
+
+window.addEventListener("resize",resizeR)
+
+resizeR()
+
+function opts(){
+
+return [...document.querySelectorAll("#options input")]
+
+.map(i=>i.value.trim()||i.placeholder.trim())
+
+.filter(Boolean)
+
+}
+
+
+
+function drawText(text,rad){
+
+let words=text.split(" ")
+
+let lines=[]
+
+let line=""
+
+ctx.font=rad*.09+"px monospace"
+
+let maxWidth=rad*.7
+
+for(let n=0;n<words.length;n++){
+
+let test=line+words[n]+" "
+
+let w=ctx.measureText(test).width
+
+if(w>maxWidth && n>0){
+
+lines.push(line)
+
+line=words[n]+" "
+
+}else{
+
+line=test
+
+}
+
+}
+
+lines.push(line)
+
+lines.forEach((l,i)=>{
+
+ctx.fillText(l.trim(),rad*.55,(i*rad*.09))
+
+})
+
+}
+
+function draw(){
+
+const o=opts()
+
+const rad=r.width/2
+
+ctx.clearRect(0,0,r.width,r.height)
+
+if(!paused){
+
+angle+=speed+extraSpeed
+
+extraSpeed*=friction
+
+}
+
+if(extraSpeed<0.0001 && forceSpin){
+
+forceSpin=false
+
+pauseOnWinner()
+
+}
+
+ctx.save()
+
+ctx.translate(rad,rad)
+
+ctx.rotate(angle)
+
+const slice=Math.PI*2/o.length
+
+o.forEach((t,i)=>{
+
+ctx.beginPath()
+
+ctx.moveTo(0,0)
+
+ctx.arc(0,0,rad*.9,i*slice,(i+1)*slice)
+
+ctx.closePath()
+
+ctx.fillStyle=`hsl(${i*360/o.length},100%,50%)`
+
+ctx.fill()
+
+ctx.strokeStyle="#00ff66"
+
+ctx.lineWidth=rad*.015
+
+ctx.stroke()
+
+ctx.save()
+
+ctx.rotate(i*slice+slice/2)
+
+ctx.fillStyle="#000"
+
+ctx.textAlign="center"
+
+drawText(t,rad)
+
+ctx.restore()
+
+})
+
+ctx.restore()
+
+requestAnimationFrame(draw)
+
+}
+
+draw()
+
+
+
+const btn=document.getElementById("spinBtn")
+
+const fill=document.getElementById("powerFill")
+
+const spinSound=document.getElementById("spinSound")
+
+const endSound=document.getElementById("endSound")
+
+let power=0
+
+let intv=null
+
+let cargando=false
+
+let bloqueado=false
+
+function iniciarFuerza(){
+
+if(bloqueado)return
+
+clearTimeout(waitTimer)
+
+paused=false
+
+power=0
+
+cargando=true
+
+clearInterval(intv)
+
+intv=setInterval(()=>{
+
+if(power<100&&cargando){
+
+power++
+
+fill.style.width=power+"%"
+
+}
+
+},20)
+
+}
+
+function soltarFuerza(){
+
+if(!cargando||bloqueado)return
+
+cargando=false
+
+bloqueado=true
+
+btn.disabled=true
+
+clearInterval(intv)
+
+fill.style.width="0%"
+
+extraSpeed=0.25*(power/100)
+
+forceSpin=true
+
+spinSound.currentTime=0
+
+spinSound.play()
+
+const desbloquear=setInterval(()=>{
+
+if(!forceSpin&&extraSpeed<0.0001){
+
+bloqueado=false
+
+btn.disabled=false
+
+clearInterval(desbloquear)
+
+}
+
+},100)
+
+}
+
+btn.addEventListener("mousedown", e => {
+    e.preventDefault();
+    iniciarFuerza();
+});
+
+btn.addEventListener("mouseup", () => {
+    soltarFuerza();
+});
+
+btn.addEventListener("mouseleave", () => {
+    if(cargando) soltarFuerza();
+});
+
+btn.addEventListener("touchstart", e => {
+    e.preventDefault();
+    iniciarFuerza();
+}, { passive:false });
+
+btn.addEventListener("touchend", () => {
+    soltarFuerza();
+});
+
+btn.addEventListener("touchcancel", () => {
+    if(cargando) soltarFuerza();
+});
+
+function winner(){
+
+const o=opts()
+
+const slice=Math.PI*2/o.length
+
+const n=(angle%(Math.PI*2)+Math.PI*2)%(Math.PI*2)
+
+const p=(3*Math.PI/2-n+Math.PI*2)%(Math.PI*2)
+
+return o[Math.floor(p/slice)]
+
+}
+
+function pauseOnWinner(){
+
+paused=true
+
+endSound.play()
+
+winnerText.textContent="Resultado: "+winner()
+
+popup.style.display="flex"
+
+crack.style.display="block"
+
+waitTimer=setTimeout(()=>{
+
+closePopup()
+
+},60000)
+
+}
+
+function closePopup(){
+
+popup.style.display="none"
+
+crack.style.display="none"
+
+}
+
+const continueBtn=document.getElementById("continueBtn")
+
+continueBtn.addEventListener("click",closePopup)
+
+continueBtn.addEventListener("touchstart",closePopup)
+
+</script>
+
+<!-- pie de pagina  -->
+
+<footer class="pie-pagina">
+        <div class="grupo-1">
+          <div class="box">
+            <figure>
+              <a href="#">
+                <img
+                  src="img/log.png"
+                  alt="Logo"
+                />
+              </a>
+            </figure>
+          </div>
+          <div class="box">
+            <h2>¿Quiénes somos?</h2>
+            <p>
+              Una empresa de videojuegos ofrece experiencias únicas de entretenimiento en consola, permitiendo a los jugadores sumergirse en mundos virtuales llenos de acción, aventura y competencia. A través de consolas de última generación, juegos variados y espacios diseñados para la comodidad, brinda la oportunidad de disfrutar solo o con amigos, vivir torneos, descubrir nuevos títulos y experimentar la emoción de jugar con el mejor rendimiento y calidad. 🎮🔥
+            </p>
+            <p>
+              para mas informacion comuniquese con nosotros.
+            </p>
+          </div>
+          <div class="box">
+            <h2>SIGUENOS:</h2>
+            <div class="redes-container">
+              <ul>
+                <li>
+                  <a
+                    href="#"
+                    class="facebook"
+                    ><i class="fab fa-facebook-f"></i
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="instagram"
+                    ><i class="fab fa-instagram"></i
+                  ></a>
+                </li>
+                <li>
+                  <a href="#" class="twitter"
+                    ><i class="fab fa-twitter"></i
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="youtube"
+                    ><i class="fab fa-youtube"></i
+                  ></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="grupo-2">
+          <small
+            >&copy; 2025 <b>Zona Gamer</b> - Todos los Derechos
+            Reservados.</small
+          >
+        </div>
+      </footer>
+      
+</body>
+</html>
