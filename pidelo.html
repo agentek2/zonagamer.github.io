@@ -3,17 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="pidelo/estilos.css">
-         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <link rel="icon" href="https://cdn.glitch.global/c8ae3563-7820-43f9-9f9d-9f7a9c05c680/Sin%20t%C3%ADtuloL.png?v=1686265807779" sizes="32x32" /> 
     <link rel="icon" href="https://cdn.glitch.global/c8ae3563-7820-43f9-9f9d-9f7a9c05c680/Sin%20t%C3%ADtuloL.png?v=1686265807779" sizes="592x592" />
     <link rel="apple-touch-icon" href="https://cdn.glitch.global/c8ae3563-7820-43f9-9f9d-9f7a9c05c680/Sin%20t%C3%ADtuloL.png?v=1686265807779" />
     <meta name="msapplication-TileImage" content="logo3" />
+    <link rel="stylesheet" href="pidelo/estilos.css">
     <link rel="icon" href="img/ojos.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>pidelo</title>
+    <title>Pidelo</title>
 </head>
+
 <body>
-    
+<header>
+    <nav>
+<div class="nav-container">
+<a href="index.html" class="logo">
+   <img src="img/log.png" style="width: 90px;">
+</a>
+<button class="menu-btn" id="menuBtn">☰</button>
+<audio id="menuMusic" loop>
+  <source src="mp3/0402.MP3" type="audio/mp3">
+</audio>
+
+<ul class="nav-links" id="navLinks">
+
+  <video loop autoplay muted class="minivideo video-menu"  id="menuVideo">
+  <source src="mp4/0402-1_fHw3YWVj.mp4" type="video/mp4">
+</video>
+
+
+<li><a href="index.html">Inicio</a></li>
+<li><a href="rule.html">Ruleta</a></li>
+<li><a href="ofertas.html">Ofertas</a></li>
+<li><a href="mapa.html">Ubicacion</a></li>
+</ul>
+</div>
+</nav>
+</header>
+<script type="text/javascript">
+    window.addEventListener("scroll", function(){
+    var header = document.querySelector("header");
+    header.classList.toggle("abajo",window.scrollY>0);
+})
+</script>
+ <!-- script del menu -->
+<script>
+
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+const links = navLinks.querySelectorAll("a");
+const music = document.getElementById("menuMusic");
+
+menuBtn.addEventListener("click", () =>{
+
+  navLinks.classList.toggle("active");
+
+  if(navLinks.classList.contains("active")){
+    menuBtn.innerHTML = "✖";
+    menuBtn.setAttribute("aria-expanded","true");
+
+    // reproducir musica
+    music.play();
+
+  }else{
+    menuBtn.innerHTML = "☰";
+    menuBtn.setAttribute("aria-expanded","false");
+
+    // detener musica
+    music.pause();
+    music.currentTime = 0;
+  }
+
+});
+
+links.forEach(link => {
+  link.addEventListener("click",() => {
+    navLinks.classList.remove("active");
+    menuBtn.innerHTML = "☰";
+    menuBtn.setAttribute("aria-expanded","false");
+
+    music.pause();
+    music.currentTime = 0;
+  })
+});
+
+</script>
+
+<section>
+
+
+</section>
+<!-- pie de pagina  -->
+
+<footer class="pie-pagina">
+        <div class="grupo-1">
+          <div class="box">
+            <figure>
+              <a href="#">
+                <img
+                  src="img/log.png"
+                  alt="Logo"
+                />
+              </a>
+            </figure>
+          </div>
+          <div class="box">
+            <h2>¿Quiénes somos?</h2>
+            <p>
+              Una empresa de videojuegos ofrece experiencias únicas de entretenimiento en consola, permitiendo a los jugadores sumergirse en mundos virtuales llenos de acción, aventura y competencia. A través de consolas de última generación, juegos variados y espacios diseñados para la comodidad, brinda la oportunidad de disfrutar solo o con amigos, vivir torneos, descubrir nuevos títulos y experimentar la emoción de jugar con el mejor rendimiento y calidad. 🎮🔥
+            </p>
+            <p>
+              para mas informacion comuniquese con nosotros.
+            </p>
+          </div>
+          <div class="box">
+            <h2>SIGUENOS:</h2>
+            <div class="redes-container">
+              <ul>
+                <li>
+                  <a
+                    href="#"
+                    class="facebook"
+                    ><i class="fab fa-facebook-f"></i
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="instagram"
+                    ><i class="fab fa-instagram"></i
+                  ></a>
+                </li>
+                <li>
+                  <a href="#" class="twitter"
+                    ><i class="fab fa-twitter"></i
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="youtube"
+                    ><i class="fab fa-youtube"></i
+                  ></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="grupo-2">
+          <small
+            >&copy; 2025 <b>Zona Gamer</b> - Todos los Derechos
+            Reservados.</small
+          >
+        </div>
+      </footer>
+      
 </body>
 </html>
