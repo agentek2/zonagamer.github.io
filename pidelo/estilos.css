@@ -449,3 +449,274 @@ display: flex;
     padding: 35px 0px;
   }
 }
+
+/* tarjetas */
+
+        /* TITULO */
+
+        .titulo-principal{
+            text-align: center;
+            font-family: Georgia, serif;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 35px;
+        }
+
+        /* CONTENEDOR */
+
+        .contenedor{
+          width: 100%;
+          height: 100vh;
+          flex-direction: column;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #11118a;
+        }
+
+        .conten{
+        display: flex;
+          width: 100%;
+            height: 100vh;
+            margin: auto;
+            
+        }
+
+        .titulo-seccion{
+            font-family: Georgia, serif;
+            font-size: 25px;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        /* PROMOCIONES */
+
+        .promociones{
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        /* TARJETA */
+
+        .card{
+            min-width: 235px;
+            width: 235px;
+            height: 382px;
+
+            background: #fafafa;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,0.12);
+
+            overflow: hidden;
+
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* IMAGEN */
+
+        .imagen{
+            width: 100%;
+            height: 225px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+        }
+
+        .imagen img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* CONTENIDO */
+
+        .contenido{
+            padding: 10px;
+            flex: 1;
+        }
+
+        .nombre{
+            font-family: Georgia, serif;
+            font-size: 17px;
+            color: #333;
+
+            width: 170px;
+            line-height: 20px;
+        }
+
+        .descripcion{
+            font-family: Georgia, serif;
+            font-size: 14px;
+
+            color: #777;
+
+            margin-top: 12px;
+
+            line-height: 20px;
+
+            height: 42px;
+        }
+
+        /* CORAZON */
+
+        .corazon{
+            position: absolute;
+
+            right: 10px;
+            top: 235px;
+
+            font-size: 28px;
+
+            color: #b51220;
+
+            cursor: pointer;
+
+            background: transparent;
+            border: none;
+        }
+
+        .corazon:hover{
+            transform: scale(1.15);
+        }
+
+        /* PRECIOS */
+
+        .precios{
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 12px;
+
+            font-family: Arial, sans-serif;
+        }
+
+        .precio{
+            font-size: 18px;
+            font-weight: bold;
+            color: #3c3c3c;
+        }
+
+        .precio-anterior{
+            color: #c62828;
+
+            text-decoration: line-through;
+
+            font-size: 14px;
+        }
+
+        .descuento{
+            background: #e00000;
+
+            color: white;
+
+            font-size: 13px;
+
+            padding: 3px 5px;
+
+            border-radius: 2px;
+        }
+
+        /* BOTON + */
+
+        .boton-mas{
+            position: absolute;
+
+            right: 10px;
+            bottom: 10px;
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            border: none;
+
+            background: #2525a8;
+
+            color: white;
+
+            font-size: 38px;
+
+            line-height: 35px;
+
+            cursor: pointer;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            transition: 0.3s;
+        }
+
+        .boton-mas:hover{
+            transform: scale(1.1);
+            background: #11118a;
+        }
+
+        .pr{
+          right: 10px; 
+           width: 100%;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:700px){
+
+            .promociones{
+              width: 90%;
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+           .pr{
+          right: 10px; 
+           width: 90%;
+        }
+           
+        .contenedor{
+          width: 100%;
+          height: 100vh;
+          flex-direction: column;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #11118a;
+        }
+
+        .conten{
+        display: flex;
+          width: 100%;
+            height: 100vh;
+            margin: auto;
+            
+        }
+            .titulo-principal{
+                font-size: 22px;
+            }
+
+            .titulo-seccion{
+                font-size: 21px;
+            }
+
+            .card{
+                min-width: 230px;
+            }
+
+        }
+
