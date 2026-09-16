@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="pidelo/estilos.css">
     <link rel="icon" href="img/ojos.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="swiper.css">
     <title>Pidelo</title>
 </head>
 
@@ -90,12 +91,93 @@ links.forEach(link => {
 
 </script>
 
+<section class="anuncio">
+      <section class="tec">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="car">
+                <picture>
+                    <source media="(max-width:700px)" srcset="/img/MOBILE_3__3.webp">
+                    <img src="/img/DESKTOP_2__3.webp" class="banner" alt="promt" />
+                </picture>  
+                </div>
+            </div>
+            <div class="swiper-slide"> 
+              <div class="car">
+               <picture>
+                    <source media="(max-width:700px)" srcset="/img/MOBILE_3__3.webp">
+                    <img src="/img/DESKTOP_2__3.webp" class="banner" alt="promt" />
+                </picture>  
+              </div>
+            </div>
+            <div class="swiper-slide"> 
+              <div class="car">
+                     <picture>
+                    <source media="(max-width:700px)" srcset="/img/MOBILE_3__3.webp">
+                    <img src="/img/DESKTOP_2__3.webp" class="banner" alt="promt" />
+                </picture>  
+              </div>
+            </div>
+            <div class="swiper-slide"> 
+              <div class="car">
+                 <picture>
+                    <source media="(max-width:700px)" srcset="/img/MOBILE_3__3.webp">
+                    <img src="/img/DESKTOP_2__3.webp" class="banner" alt="promt" />
+                </picture>  
+              </div>
+            </div>
+            <div class="swiper-slide"> 
+              <div class="car">
+                <picture>
+                    <source media="(max-width:700px)" srcset="/img/MOBILE_3__3.webp">
+                    <img src="/img/DESKTOP_2__3.webp" class="banner" alt="promt" />
+                </picture>  
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="car">
+                <picture>
+                    <source media="(max-width:700px)" srcset="/img/MOBILE_3__3.webp">
+                    <img src="/img/DESKTOP_2__3.webp" class="banner" alt="promt" />
+                </picture>  
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </section>
+      </section>
+<script src="script.js">
+</script>
+        <script>
+            
+          var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 0,
+            centeredSlides: true,
+            autoplay: {
+              delay: 2500,
+              disableOnInteraction: false,
+            },
+            pagination: {
+              el: ".swiper-pagination",
+              clickable: true,
+            },
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            },
+          });
+        </script>
+
 <section class="conten">
 
     <div class="contenedor">
 <div class="pr">
         <h1 class="titulo-principal">
-            LAS MEJORES HAMBURGUESAS
+            LA MEJOR LISTA QUE CONOCERAS HOY
         </h1>
 
 
@@ -112,7 +194,7 @@ links.forEach(link => {
             <div class="card">
 
                 <div class="imagen">
-                    <img src="imagenes/hamburguesa1.png" alt="">
+                    <img src="img/bebidafrozen2.jpg" alt="">
                 </div>
 
                 <button class="corazon">
@@ -356,6 +438,267 @@ links.forEach(link => {
         </div>
 
     </div>
+</section>
+
+<section class="set2">
+
+    <div class="contenedor">
+<div class="pr">
+        <h2 class="titulo-seccion">
+            RECOMENDADOS PARA TI
+        </h2>
+</div>  
+        <div class="promociones">
+            <!-- TARJETA 1 -->
+
+            <div class="card">
+
+                <div class="imagen">
+                    <img src="img/bebidafrozen2.jpg" alt="">
+                </div>
+
+                <button class="corazon">
+                    ♡
+                </button>
+
+                <div class="contenido">
+
+                    <h3 class="nombre">
+                        Promo Doble Queso Tocino
+                    </h3>
+
+                    <p class="descripcion">
+                        1 Doble queso tocino regular,
+                        1 papa regular, gaseosa personal.
+                    </p>
+
+                    <div class="precios">
+
+                        <span class="precio">
+                            S/19.90
+                        </span>
+
+                        <span class="precio-anterior">
+                            S/34.70
+                        </span>
+
+                        <span class="descuento">
+                            -42%
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <button class="boton-mas">
+                    +
+                </button>
+
+            </div>
+
+
+
+            <!-- TARJETA 2 -->
+
+            <div class="card">
+
+                <div class="imagen">
+                    <img src="imagenes/hamburguesa2.png" alt="">
+                </div>
+
+                <button class="corazon">
+                    ♡
+                </button>
+
+                <div class="contenido">
+
+                    <h3 class="nombre">
+                        Dúo Imperdible
+                    </h3>
+
+                    <p class="descripcion">
+                        1 Clásica regular,
+                        1 Churrita regular,
+                        2 papas regulares
+                    </p>
+
+                    <div class="precios">
+
+                        <span class="precio">
+                            S/19.90
+                        </span>
+
+                        <span class="precio-anterior">
+                            S/45.60
+                        </span>
+
+                        <span class="descuento">
+                            -56%
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <button class="boton-mas">
+                    +
+                </button>
+
+            </div>
+
+
+
+            <!-- TARJETA 3 -->
+
+            <div class="card">
+
+                <div class="imagen">
+                    <img src="imagenes/hamburguesa3.png" alt="">
+                </div>
+
+                <button class="corazon">
+                    ♡
+                </button>
+
+                <div class="contenido">
+
+                    <h3 class="nombre">
+                        Dúo Sabroso
+                    </h3>
+
+                    <p class="descripcion">
+                        2 A lo pobre regulares,
+                        2 papas regulares,
+                        2 gaseosas personales
+                    </p>
+
+                    <div class="precios">
+
+                        <span class="precio">
+                            S/28.90
+                        </span>
+
+                        <span class="precio-anterior">
+                            S/68.40
+                        </span>
+
+                        <span class="descuento">
+                            -57%
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <button class="boton-mas">
+                    +
+                </button>
+
+            </div>
+
+
+
+            <!-- TARJETA 4 -->
+
+            <div class="card">
+
+                <div class="imagen">
+                    <img src="imagenes/hamburguesa4.png" alt="">
+                </div>
+
+                <button class="corazon">
+                    ♡
+                </button>
+
+                <div class="contenido">
+
+                    <h3 class="nombre">
+                        Dúo Queso Tocino
+                    </h3>
+
+                    <p class="descripcion">
+                        2 Queso Tocino regulares,
+                        2 papas regulares
+                    </p>
+
+                    <div class="precios">
+
+                        <span class="precio">
+                            S/25.90
+                        </span>
+
+                        <span class="precio-anterior">
+                            S/43.60
+                        </span>
+
+                        <span class="descuento">
+                            -40%
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <button class="boton-mas">
+                    +
+                </button>
+
+            </div>
+
+
+
+            <!-- TARJETA 5 -->
+
+            <div class="card">
+
+                <div class="imagen">
+                    <img src="imagenes/hamburguesa5.png" alt="">
+                </div>
+
+                <button class="corazon">
+                    ♡
+                </button>
+
+                <div class="contenido">
+
+                    <h3 class="nombre">
+                        Personal Clásica
+                    </h3>
+
+                    <p class="descripcion">
+                        Promoción de 1 Hamburguesa
+                        Clásica regular y 1 papa mediana
+                    </p>
+
+                    <div class="precios">
+
+                        <span class="precio">
+                            S/12.90
+                        </span>
+
+                        <span class="precio-anterior">
+                            S/21.60
+                        </span>
+
+                        <span class="descuento">
+                            -40%
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <button class="boton-mas">
+                    +
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
 
 
 
