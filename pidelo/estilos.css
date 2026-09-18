@@ -199,13 +199,14 @@ header .abajo:hover{
   
   .nav-links.active .video-menu{
     display: block;
-    top: 60px;
+    top: 59px;
     width: 100%;
-    height: 30vh;
+    height: 22vh;
     margin-bottom: 15px;
     background-color: #1e393200;
   object-fit: cover;
   position: fixed;
+  filter: brightness(0.5);
   }
 
   .logo{
@@ -802,7 +803,7 @@ height: 70vh;
   display: flex;
 width: 100%;
 height: 59vh;
-background-color: #c62828;
+background-color: #f7f7f7;
 }
 
   .swiper-horizontal{
