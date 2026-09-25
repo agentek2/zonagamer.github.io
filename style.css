@@ -5,6 +5,12 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
+*,
+*::before,
+*::after {
+    font-family: 'Luckiest Guy', cursive;
+}
+
 header.abajo{
     background: #ffffff00;
     
