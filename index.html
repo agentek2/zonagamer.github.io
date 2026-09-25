@@ -29,12 +29,16 @@
 </a>
 
 <audio id="sonidoCuervo" preload="auto">
-      <source src="mp3/cuervo.mp3" type="audio/mpeg">
+      <source src="mp3/cuervo2.mp3" type="audio/mpeg">
    </audio>
 
 <button class="menu-btn" id="menuBtn">☰</button>
 <audio id="menuMusic" loop>
   <source src="mp3/android.mp3" type="audio/mp3">
+</audio>
+
+<audio id="sonidoRayo" preload="auto">
+    <source src="mp3/rayo1.mp3" type="audio/mpeg">
 </audio>
 
 <ul class="nav-links" id="navLinks">
@@ -132,7 +136,7 @@ links.forEach(link => {
 
  <section class="home">
   <div class="titu">
-    <h1 style="font-size: 50px;">ARZARO</h1>
+    <h1 style="font-size: 50px;" id="corre1">ARZARO</h1>
     <P style="font-size: 19px; margin: 1px -20px; padding: 20px 20px;">hola desde HTML</P>
   </div>
 <video muted autoplay loop id="mainVideo">
@@ -140,6 +144,9 @@ links.forEach(link => {
 </video>
 <div class="capa"></div>
 </section>
+
+   
+
 <!-- bebidas 1 -->
 <section class="bebidas">
 <div class="izquierda">
@@ -184,18 +191,18 @@ links.forEach(link => {
         <div class="grupo-1">
           <div class="box">
             <figure>
-              <a href="#">
-                <img
-                  src="img/logo444.png"
-                  alt="Logo"
-                />
-              </a>
-            </figure>
+    <img 
+        src="img/logo444.png"
+        alt="ARZARO"
+        id="logo444"
+        class="logo-rayo"
+    />
+</figure>
           </div>
           <div class="box">
             <h2>¿Quiénes somos?</h2>
             <p>
-              Una empresa de videojuegos ofrece experiencias únicas de entretenimiento en consola, permitiendo a los jugadores sumergirse en mundos virtuales llenos de acción, aventura y competencia. A través de consolas de última generación, juegos variados y espacios diseñados para la comodidad, brinda la oportunidad de disfrutar solo o con amigos, vivir torneos, descubrir nuevos títulos y experimentar la emoción de jugar con el mejor rendimiento y calidad. 🎮🔥
+Es una marca creada para disfrutar momentos especiales y mucho más. Una experiencia donde el sabor, la calidad y el estilo se combinan para ofrecer algo diferente.
             </p>
             <p>
               para mas informacion comuniquese con nosotros.
@@ -242,6 +249,67 @@ links.forEach(link => {
           >
         </div>
       </footer>
-      
+      <!-- EFECTO TORMENTA ARZARO -->
+
+<div id="tormenta">
+    <div id="rayo"></div>
+    <div id="lluvia"></div>
+</div>
+
+<script>
+const logo444 = document.getElementById("logo444");
+const tormenta = document.getElementById("tormenta");
+const lluvia = document.getElementById("lluvia");
+const sonidoRayo = document.getElementById("sonidoRayo");
+
+logo444.addEventListener("click", function () {
+
+    // Reiniciar el sonido
+    sonidoRayo.currentTime = 0;
+
+    // Reproducir sonido
+    sonidoRayo.play();
+
+    // Reiniciar la animación
+    tormenta.classList.remove("tormenta-activa");
+    void tormenta.offsetWidth;
+
+    // Activar tormenta
+    tormenta.classList.add("tormenta-activa");
+
+    // Crear lluvia
+    lluvia.innerHTML = "";
+
+    for (let i = 0; i < 180; i++) {
+
+        const gota = document.createElement("span");
+
+        gota.classList.add("gota");
+
+        gota.style.left = Math.random() * 100 + "%";
+
+        gota.style.animationDuration =
+            (0.3 + Math.random() * 0.5) + "s";
+
+        gota.style.animationDelay =
+            Math.random() * 0.5 + "s";
+
+        lluvia.appendChild(gota);
+    }
+
+    // Después de 5 segundos termina la tormenta
+    setTimeout(() => {
+
+        // Quitar lluvia
+        tormenta.classList.remove("tormenta-activa");
+
+        // Detener sonido
+        sonidoRayo.pause();
+        sonidoRayo.currentTime = 0;
+
+    }, 5000);
+
+});
+</script>
 </body>
 </html>
