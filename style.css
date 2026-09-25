@@ -2,14 +2,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Luckiest Guy', cursive;
 }
 
-*,
-*::before,
-*::after {
-    font-family: 'Luckiest Guy', cursive;
-}
+
 
 header.abajo{
     background: #ffffff00;
@@ -102,7 +98,7 @@ header .abajo:hover{
 
 .logo{
   position: absolute;
-  width: 157px;
+  width: 70px;
   top: -4px;
   left: 0px;
 }
@@ -221,7 +217,7 @@ header .abajo:hover{
   }
 
   .logo{
-  
+  width: 60px;
     position: absolute;
   top: -4px;
 }

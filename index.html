@@ -22,9 +22,16 @@
 <header>
 <nav>
 <div class="nav-container">
-<a href="index.html" class="logo">
-   <img src="img/logo2.png" class="xyz">
+
+
+<a href="index.html" class="logo" id="logoCuervo">
+   <img src="img/logo2.png" class="xyz" alt="ARZARO">
 </a>
+
+<audio id="sonidoCuervo" preload="auto">
+      <source src="mp3/cuervo.mp3" type="audio/mpeg">
+   </audio>
+
 <button class="menu-btn" id="menuBtn">☰</button>
 <audio id="menuMusic" loop>
   <source src="mp3/android.mp3" type="audio/mp3">
@@ -45,6 +52,33 @@
 </div>
 </nav>
 </header>
+
+<!-- sonido -->
+
+<script>
+const logo = document.getElementById("logoCuervo");
+const sonido = document.getElementById("sonidoCuervo");
+
+logo.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    sonido.currentTime = 0;
+
+    sonido.play()
+        .then(() => {
+            console.log("Sonido OK");
+
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 500);
+        })
+        .catch(error => {
+            console.error("Error de audio:", error);
+            window.location.href = "index.html";
+        });
+});
+</script>
+
 <script type="text/javascript">
     window.addEventListener("scroll", function(){
     var header = document.querySelector("header");
@@ -98,15 +132,15 @@ links.forEach(link => {
 
  <section class="home">
   <div class="titu">
-    <h1 style="font-size: 50px;">ZONA GAMER</h1>
-    <P style="font-size: 19px; margin: 1px -20px; padding: 20px 20px;">Ahora estamos mas conectados que nunca.</P>
+    <h1 style="font-size: 50px;">ARZARO</h1>
+    <P style="font-size: 19px; margin: 1px -20px; padding: 20px 20px;">hola desde HTML</P>
   </div>
 <video muted autoplay loop id="mainVideo">
-  <source src="mp4/anime.mp4" type="video/mp4">
+  <source src="mp4/nuevo.mp4" type="video/mp4">
 </video>
 <div class="capa"></div>
 </section>
-<!-- bebidas uno -->
+<!-- bebidas 1 -->
 <section class="bebidas">
 <div class="izquierda">
 
@@ -115,7 +149,7 @@ links.forEach(link => {
     <h3 class="con">Una nueva manera de tomar tu bebida favorita</h3>
     <h4 class="extra">Eleva tu día con sabores únicas junto a Strato.</h4>
             <div class="nexlo" >
-            <a href="pidelo.html" class="btn-neon">
+            <a href="pidelo.html" class="btn-neon" style=" font-family: 'Luckiest Guy', cursive;">
                 <span id="span1"></span>
                 <span id="span2"></span>
                 <span id="span3"></span>
@@ -131,7 +165,7 @@ links.forEach(link => {
 <h3 class="new">Vuelven tus favoritos llenos de sabor</h3>
     <h4 class="maxi">Disfruta de tu día con Cookies & Cream</h4>
      <div class="nexlo" >
-            <a href="pidelo.html" class="btn-neon">
+            <a href="pidelo.html" class="btn-neon" style=" font-family: 'Luckiest Guy', cursive;">
                 <span id="span1"></span>
                 <span id="span2"></span>
                 <span id="span3"></span>
@@ -152,7 +186,7 @@ links.forEach(link => {
             <figure>
               <a href="#">
                 <img
-                  src="img/logo4.png"
+                  src="img/logo444.png"
                   alt="Logo"
                 />
               </a>
@@ -203,7 +237,7 @@ links.forEach(link => {
         </div>
         <div class="grupo-2">
           <small
-            >&copy; 2025 <b>Zona Gamer</b> - Todos los Derechos
+            >&copy; 2025 <b>ARZARO</b> - Todos los Derechos
             Reservados.</small
           >
         </div>
