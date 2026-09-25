@@ -97,7 +97,7 @@ header .abajo:hover{
 .logo{
   position: absolute;
   width: 157px;
-  top: 21px;
+  top: -4px;
   left: 0px;
 }
 
@@ -188,7 +188,9 @@ header .abajo:hover{
 
 }
 
-
+.xyz{
+  width: 60px;
+}
 
 .video-menu{
   display: none;
@@ -211,8 +213,15 @@ header .abajo:hover{
 
   .logo{
     position: absolute;
-  top: 10px;
+  top: -4px;
 }
+
+
+.xyz{
+  width: 48px;
+}
+
+
 }
 
  /* mapa */
