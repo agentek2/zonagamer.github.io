@@ -10,6 +10,10 @@
     <meta name="msapplication-TileImage" content="logo3" />
     <link rel="stylesheet" href="ruleta/estilos.css">
     <link rel="icon" href="img/ojos.ico">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Ubicacion</title>
 </head>
@@ -17,10 +21,20 @@
 <header>
 <nav>
 <div class="nav-container">
-<a href="index.html" class="logo">
-   <img src="img/logo2.png" class="xyz">
+<a href="index.html" class="logo" id="logoCuervo">
+   <img src="img/logo2.png" class="xyz" alt="ARZARO">
 </a>
+
+<audio id="sonidoCuervo" preload="auto">
+      <source src="mp3/cuervo2.mp3" type="audio/mpeg">
+   </audio>
+
 <button class="menu-btn" id="menuBtn">☰</button>
+
+   <audio id="sonidoRayo" preload="auto">
+    <source src="mp3/rayo1.mp3" type="audio/mpeg">
+</audio>
+
 <audio id="menuMusic" loop>
   <source src="mp3/android.mp3" type="audio/mp3">
 </audio>
@@ -40,6 +54,31 @@
 </div>
 </nav>
 </header>
+
+<script>
+const logo = document.getElementById("logoCuervo");
+const sonido = document.getElementById("sonidoCuervo");
+
+logo.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    sonido.currentTime = 0;
+
+    sonido.play()
+        .then(() => {
+            console.log("Sonido OK");
+
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 500);
+        })
+        .catch(error => {
+            console.error("Error de audio:", error);
+            window.location.href = "index.html";
+        });
+});
+</script>
+
 <script type="text/javascript">
     window.addEventListener("scroll", function(){
     var header = document.querySelector("header");
@@ -507,14 +546,14 @@ continueBtn.addEventListener("touchstart",closePopup)
 <footer class="pie-pagina">
         <div class="grupo-1">
           <div class="box">
-            <figure>
-              <a href="#">
-                <img
-                  src="img/logo4.png"
-                  alt="Logo"
-                />
-              </a>
-            </figure>
+                                  <figure>
+    <img 
+        src="img/logo444.png"
+        alt="ARZARO"
+        id="logo444"
+        class="logo-rayo"
+    />
+</figure>
           </div>
           <div class="box">
             <h2>¿Quiénes somos?</h2>
@@ -566,6 +605,91 @@ continueBtn.addEventListener("touchstart",closePopup)
           >
         </div>
       </footer>
+                        <div id="tormenta">
+
+    <div id="rayo"></div>
+
+    <div id="lluvia"></div>
+
+</div>
+
+<script>
+
+const logo444 = document.getElementById("logo444");
+const tormenta = document.getElementById("tormenta");
+const lluvia = document.getElementById("lluvia");
+const sonidoRayo = document.getElementById("sonidoRayo");
+
+logo444.addEventListener("click", function () {
+
+    console.log("CLICK EN LOGO");
+
+    /* =========================
+       SONIDO
+    ========================= */
+
+    if (sonidoRayo) {
+        sonidoRayo.currentTime = 0;
+        sonidoRayo.play();
+    }
+
+    /* =========================
+       REINICIAR TORMENTA
+    ========================= */
+
+    tormenta.classList.remove("tormenta-activa");
+
+    void tormenta.offsetWidth;
+
+    tormenta.classList.add("tormenta-activa");
+
+    /* =========================
+       CREAR LLUVIA
+    ========================= */
+
+    lluvia.innerHTML = "";
+
+    for (let i = 0; i < 250; i++) {
+
+        const gota = document.createElement("span");
+
+        gota.classList.add("gota");
+
+        gota.style.left = Math.random() * 100 + "%";
+
+        gota.style.animationDuration =
+            (0.25 + Math.random() * 0.5) + "s";
+
+        gota.style.animationDelay =
+            Math.random() * 1 + "s";
+
+        gota.style.opacity =
+            0.3 + Math.random() * 0.7;
+
+        lluvia.appendChild(gota);
+    }
+
+    /* =========================
+       TERMINAR TORMENTA
+    ========================= */
+
+    setTimeout(function () {
+
+        tormenta.classList.remove("tormenta-activa");
+
+        lluvia.innerHTML = "";
+
+        if (sonidoRayo) {
+            sonidoRayo.pause();
+            sonidoRayo.currentTime = 0;
+        }
+
+    }, 5000);
+
+});
+
+</script>
+
       
 </body>
 </html>
