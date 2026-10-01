@@ -49,9 +49,9 @@
 
 
 <li><a href="index.html">INICIO</a></li>
-<li><a href="rule.html">RULETA</a></li>
-<li><a href="ofertas.html">PROMOS EXCLUSIVAS</a></li>
 <li><a href="mapa.html">LOCALES</a></li>
+<li><a href="ofertas.html">PROMOS EXCLUSIVAS</a></li>
+<li><a href="rule.html">RULETA</a></li>
 </ul>
 </div>
 </nav>
@@ -105,14 +105,14 @@ menuBtn.addEventListener("click", () =>{
     menuBtn.innerHTML = "✖";
     menuBtn.setAttribute("aria-expanded","true");
 
-    // reproducir musica
+
     music.play();
 
   }else{
     menuBtn.innerHTML = "☰";
     menuBtn.setAttribute("aria-expanded","false");
 
-    // detener musica
+
     music.pause();
     music.currentTime = 0;
   }
@@ -250,8 +250,6 @@ Es una marca creada para disfrutar momentos especiales y mucho más. Una experie
           >
         </div>
       </footer>
-      <!-- EFECTO TORMENTA ARZARO -->
-
 <div id="tormenta">
     <div id="rayo"></div>
     <div id="lluvia"></div>
@@ -265,20 +263,20 @@ const sonidoRayo = document.getElementById("sonidoRayo");
 
 logo444.addEventListener("click", function () {
 
-    // Reiniciar el sonido
+    
     sonidoRayo.currentTime = 0;
 
-    // Reproducir sonido
+   
     sonidoRayo.play();
 
-    // Reiniciar la animación
+
     tormenta.classList.remove("tormenta-activa");
     void tormenta.offsetWidth;
 
-    // Activar tormenta
+   
     tormenta.classList.add("tormenta-activa");
 
-    // Crear lluvia
+   
     lluvia.innerHTML = "";
 
     for (let i = 0; i < 180; i++) {
@@ -298,18 +296,12 @@ logo444.addEventListener("click", function () {
         lluvia.appendChild(gota);
     }
 
-    // Después de 5 segundos termina la tormenta
+    
     setTimeout(() => {
-
-        // Quitar lluvia
         tormenta.classList.remove("tormenta-activa");
-
-        // Detener sonido
         sonidoRayo.pause();
         sonidoRayo.currentTime = 0;
-
     }, 5000);
-
 });
 </script>
 </body>

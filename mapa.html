@@ -15,7 +15,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Ubicacion</title>
+    <title>LOCALES</title>
 </head>
 
 <body>
@@ -36,7 +36,7 @@
 
 
    <audio id="sonidoRayo" preload="auto">
-    <source src="mp3/rayo1.mp3" type="audio/mpeg">
+    <source src="mp3/rain-and-raven.mp3" type="audio/mpeg">
 </audio>
 <audio id="menuMusic" loop>
   <source src="mp3/android.mp3" type="audio/mp3">
@@ -49,10 +49,10 @@
 </video>
 
 
-<li><a href="index.html">Inicio</a></li>
-<li><a href="rule.html">Ruleta</a></li>
-<li><a href="ofertas.html">Ofertas</a></li>
-<li><a href="mapa.html">Ubicacion</a></li>
+<li><a href="index.html">INICIO</a></li>
+<li><a href="mapa.html">LOCALES</a></li>
+<li><a href="ofertas.html">PROMOS EXCLUSIVAS</a></li>
+<li><a href="rule.html">RULETA</a></li>
 </ul>
 </div>
 </nav>
@@ -134,55 +134,292 @@ links.forEach(link => {
 <!-- mapas -->
 <section class="ubicacion">
 <div class="izquierda">
-<h1 class="titulos">illuminati gaming</h1>
-<div class="imagenes">
-<img src="img/WhatsApp Image 2026-06-09 at 3.58.47 PM (1).jpeg" alt="" class="fotos">
-<img src="img/WhatsApp Image 2026-06-09 at 3.58.47 PM (2).jpeg" alt="" class="fotos">
-<img src="img/hh.jpeg" alt="" class="fotos">
-<img src="img/ii.jpeg" alt="" class="fotos">
+
+    
+
 </div>
-<h2 style="font-size: 20px;color: black;">click en la imagen</h2>
-</div>
+
+
 <div class="derecha">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d981.9057782149058!2d-76.20668343051702!3d-10.129903679174438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91a7ee3c6ad1e1cd%3A0x72cd205b00a610f4!2sJiron%20Progreso%20308%2C%20Ambo%2010421!5e0!3m2!1ses-419!2spe!4v1778942645386!5m2!1ses-419!2spe" width="500" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>         
+   <!-- TÍTULO -->
+
+    <div class="titulo">
+        <span>⌖</span>
+        ARZARO AMBO
+    </div>
+
+
+    <div class="locales">
+
+
+        <!-- ================================================= -->
+        <!-- LAS GARDENIAS -->
+        <!-- ================================================= -->
+
+        <div class="local" data-local="gardenias">
+
+            <button class="cerrar" onclick="cerrarLocal(event)">
+                ×
+            </button>
+
+            <div class="nombre">
+                (2104) LAS GARDENIAS
+            </div>
+
+            <div class="direccion">
+                Av. Benavides 5350, Miraflores,<br>
+                Lima, Lima, 150122, PE
+            </div>
+
+            <div class="telefono">
+                Teléfono 419-1919
+            </div>
+
+
+            <div class="despacho">
+
+                <div class="despacho-titulo">
+                    Tipo de Despacho
+                </div>
+
+                <div class="opciones">
+
+                    <div class="opcion">
+                        <span class="icono">♧</span>
+                        Delivery
+                    </div>
+
+                    <div class="opcion">
+                        <span class="icono">⌖</span>
+                        Retiro en Tienda
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="btn-local"
+                onclick="mostrarLocal(this)">
+                Ver local
+            </button>
+
+
+            <!-- MAPA -->
+
+            <div class="mapa-container">
+
+                <iframe
+                    class="mapa"
+                    src="https://www.google.com/maps?q=Av.+Benavides+5350,+Miraflores,+Lima,+Peru&output=embed"
+                    loading="lazy"
+                    allowfullscreen>
+                </iframe>
+
+
+                <div class="direccion-container">
+
+                    <button
+                        class="btn-direccion"
+                        onclick="irGoogleMaps(
+                            'Av. Benavides 5350, Miraflores, Lima, Peru'
+                        )">
+
+                        VER DIRECCIÓN
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- LA FONTANA -->
+        <!-- ================================================= -->
+
+        <div class="local" data-local="fontana">
+
+            <button class="cerrar" onclick="cerrarLocal(event)">
+                ×
+            </button>
+
+            <div class="nombre">
+                (2138) LA FONTANA
+            </div>
+
+            <div class="direccion">
+                Av. La Molina Lt. 111 Mz. A Urb.<br>
+                Residencial Monterrico, La Molina,<br>
+                Lima, Lima, 150114, PE
+            </div>
+
+            <div class="telefono">
+                Teléfono 419-1919
+            </div>
+
+
+            <div class="despacho">
+
+                <div class="despacho-titulo">
+                    Tipo de Despacho
+                </div>
+
+                <div class="opciones">
+
+                    <div class="opcion">
+                        <span class="icono">♧</span>
+                        Delivery
+                    </div>
+
+                    <div class="opcion">
+                        <span class="icono">⌖</span>
+                        Retiro en Tienda
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="btn-local"
+                onclick="mostrarLocal(this)">
+                Ver local
+            </button>
+
+
+            <!-- MAPA -->
+
+            <div class="mapa-container">
+
+                <iframe
+                    class="mapa"
+                    src="https://www.google.com/maps?q=Av.+La+Molina+111,+La+Molina,+Lima,+Peru&output=embed"
+                    loading="lazy"
+                    allowfullscreen>
+                </iframe>
+
+
+                <div class="direccion-container">
+
+                    <button
+                        class="btn-direccion"
+                        onclick="irGoogleMaps(
+                            'Av. La Molina 111, La Molina, Lima, Peru'
+                        )">
+
+                        VER DIRECCIÓN
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- LARCO -->
+        <!-- ================================================= -->
+
+        <div class="local" data-local="larco">
+
+            <button class="cerrar" onclick="cerrarLocal(event)">
+                ×
+            </button>
+
+            <div class="nombre">
+                (2111) LARCO
+            </div>
+
+            <div class="direccion">
+                Av. Larco 461, Miraflores, Lima,<br>
+                Lima, 15012, PE
+            </div>
+
+            <div class="telefono">
+                Teléfono 1231321
+            </div>
+
+
+            <div class="despacho">
+
+                <div class="despacho-titulo">
+                    Tipo de Despacho
+                </div>
+
+                <div class="opciones">
+
+                    <div class="opcion">
+                        <span class="icono">♧</span>
+                        Delivery
+                    </div>
+
+                    <div class="opcion">
+                        <span class="icono">⌖</span>
+                        Retiro en Tienda
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="btn-local"
+                onclick="mostrarLocal(this)">
+                Ver local
+            </button>
+
+
+            <!-- MAPA -->
+
+            <div class="mapa-container">
+
+                <iframe
+                    class="mapa"
+                    src="https://www.google.com/maps?q=Av.+Larco+461,+Miraflores,+Lima,+Peru&output=embed"
+                    loading="lazy"
+                    allowfullscreen>
+                </iframe>
+
+
+                <div class="direccion-container">
+
+                    <button
+                        class="btn-direccion"
+                        onclick="irGoogleMaps(
+                            'Av. Larco 461, Miraflores, Lima, Peru'
+                        )">
+
+                        VER DIRECCIÓN
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 </section>
 
-<!-- Ventana emergente -->
-<div id="miModal" class="modal">
-    <span class="cerrar">&times;</span>
-    <img class="modal-contenido" id="imgGrande">
-</div>
 
-<script>
-const modal = document.getElementById("miModal");
-const imgGrande = document.getElementById("imgGrande");
-const cerrar = document.querySelector(".cerrar");
 
-// Todas las imágenes con clase fotos
-document.querySelectorAll(".fotos").forEach(imagen => {
-    imagen.addEventListener("click", () => {
-        modal.style.display = "block";
-        imgGrande.src = imagen.src;
-    });
-});
-
-// Cerrar con la X
-cerrar.addEventListener("click", () => {
-    modal.style.display = "none";
-});
-
-// Cerrar haciendo clic fuera de la imagen
-modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        modal.style.display = "none";
-    }
-});
-</script>
 
 <!-- pie de pagina  -->
 
-<footer class="pie-pagina">
+<footer class="pie-pagina" style="background-color: #1e3932;">
         <div class="grupo-1">
           <div class="box">
                         <figure>
@@ -194,16 +431,16 @@ modal.addEventListener("click", (e) => {
     />
 </figure>
           </div>
-          <div class="box">
+          <div class="box" style="background-color: #1e3932;">
             <h2>¿Quiénes somos?</h2>
             <p>
-              Una empresa de videojuegos ofrece experiencias únicas de entretenimiento en consola, permitiendo a los jugadores sumergirse en mundos virtuales llenos de acción, aventura y competencia. A través de consolas de última generación, juegos variados y espacios diseñados para la comodidad, brinda la oportunidad de disfrutar solo o con amigos, vivir torneos, descubrir nuevos títulos y experimentar la emoción de jugar con el mejor rendimiento y calidad. 🎮🔥
-            </p>
+
+Es una marca creada para disfrutar momentos especiales y mucho más. Una experiencia donde el sabor, la calidad y el estilo se combinan para ofrecer algo diferente.            </p>
             <p>
               para mas informacion comuniquese con nosotros.
             </p>
           </div>
-          <div class="box">
+          <div class="box" style="background-color: #1e3932;">
             <h2>SIGUENOS:</h2>
             <div class="redes-container">
               <ul>
@@ -239,7 +476,7 @@ modal.addEventListener("click", (e) => {
         </div>
         <div class="grupo-2">
           <small
-            >&copy; 2025 <b>Zona Gamer</b> - Todos los Derechos
+            >&copy; 2025 <b>ARZARO</b> - Todos los Derechos
             Reservados.</small
           >
         </div>
@@ -251,6 +488,182 @@ modal.addEventListener("click", (e) => {
     <div id="lluvia"></div>
 
 </div>
+
+ <script>
+
+        /* ==========================================
+           MOSTRAR LOCAL
+        ========================================== */
+
+        function mostrarLocal(boton) {
+
+            const localSeleccionado =
+                boton.closest(".local");
+
+            const locales =
+                document.querySelectorAll(".local");
+
+
+            /*
+             * Ocultar todos los demás locales
+             */
+
+            locales.forEach(function(local) {
+
+                if (local !== localSeleccionado) {
+
+                    local.classList.add("oculto");
+
+                }
+
+            });
+
+
+            /*
+             * Mostrar el seleccionado
+             */
+
+            localSeleccionado.classList.add("seleccionado");
+
+
+            /*
+             * Subir la página hasta el local seleccionado
+             */
+
+            setTimeout(function() {
+
+                localSeleccionado.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }, 100);
+
+        }
+
+
+
+        /* ==========================================
+           CERRAR LOCAL
+        ========================================== */
+
+        function cerrarLocal(event) {
+
+            event.stopPropagation();
+
+            const locales =
+                document.querySelectorAll(".local");
+
+
+            locales.forEach(function(local) {
+
+                local.classList.remove("oculto");
+                local.classList.remove("seleccionado");
+
+            });
+
+        }
+
+
+
+        /* ==========================================
+           ABRIR GOOGLE MAPS
+        ========================================== */
+
+        function irGoogleMaps(destino) {
+
+            /*
+             * Primero intentamos obtener
+             * la ubicación actual del usuario.
+             */
+
+            if (navigator.geolocation) {
+
+                navigator.geolocation.getCurrentPosition(
+
+                    function(position) {
+
+                        const lat =
+                            position.coords.latitude;
+
+                        const lng =
+                            position.coords.longitude;
+
+
+                        /*
+                         * Google Maps recibe:
+                         *
+                         * origin = ubicación actual
+                         * destination = local
+                         * travelmode = driving
+                         */
+
+                        const url =
+                            "https://www.google.com/maps/dir/?api=1"
+                            + "&origin="
+                            + lat
+                            + ","
+                            + lng
+                            + "&destination="
+                            + encodeURIComponent(destino)
+                            + "&travelmode=driving";
+
+
+                        window.open(
+                            url,
+                            "_blank"
+                        );
+
+                    },
+
+                    function(error) {
+
+                        /*
+                         * Si el usuario no permite
+                         * ubicación, abrimos Google Maps
+                         * igualmente con el destino.
+                         */
+
+                        const url =
+                            "https://www.google.com/maps/dir/?api=1"
+                            + "&destination="
+                            + encodeURIComponent(destino)
+                            + "&travelmode=driving";
+
+
+                        window.open(
+                            url,
+                            "_blank"
+                        );
+
+                    }
+
+                );
+
+            } else {
+
+                /*
+                 * Navegador sin geolocalización
+                 */
+
+                const url =
+                    "https://www.google.com/maps/dir/?api=1"
+                    + "&destination="
+                    + encodeURIComponent(destino)
+                    + "&travelmode=driving";
+
+
+                window.open(
+                    url,
+                    "_blank"
+                );
+
+            }
+
+        }
+
+    </script>
+
      <script>
 
 const logo444 = document.getElementById("logo444");
@@ -262,28 +675,16 @@ logo444.addEventListener("click", function () {
 
     console.log("CLICK EN LOGO");
 
-    /* =========================
-       SONIDO
-    ========================= */
-
     if (sonidoRayo) {
         sonidoRayo.currentTime = 0;
         sonidoRayo.play();
     }
-
-    /* =========================
-       REINICIAR TORMENTA
-    ========================= */
 
     tormenta.classList.remove("tormenta-activa");
 
     void tormenta.offsetWidth;
 
     tormenta.classList.add("tormenta-activa");
-
-    /* =========================
-       CREAR LLUVIA
-    ========================= */
 
     lluvia.innerHTML = "";
 
@@ -307,9 +708,6 @@ logo444.addEventListener("click", function () {
         lluvia.appendChild(gota);
     }
 
-    /* =========================
-       TERMINAR TORMENTA
-    ========================= */
 
     setTimeout(function () {
 
@@ -327,5 +725,6 @@ logo444.addEventListener("click", function () {
 });
 
 </script>
+
 </body>
 </html>
