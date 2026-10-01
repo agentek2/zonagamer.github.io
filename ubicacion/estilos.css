@@ -234,6 +234,16 @@ header .abajo:hover{
 
  /* mapa */
 
+.d1{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 90px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
 .ubicacion {
     width: 100%;
     min-height: 100vh;
@@ -254,6 +264,60 @@ width: 50%;
 height: 100vh;
 flex-direction: column;
  }
+
+     .boton-menu {
+            width: 238px;
+            height: 52px;
+margin: 16px 0px;
+            background-color: #1e3932;
+            color: white;
+
+            border: none;
+            border-radius: 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+       font-family: 'Luckiest Guy', cursive;
+            font-size: 14px;
+            font-weight: normal;
+
+            cursor: pointer;
+        }
+
+        /* Icono */
+        .icono-menu {
+            width: 12px;
+            height: 10px;
+            position: relative;
+            border: 1.5px solid white;
+            border-radius: 2px;
+            box-sizing: border-box;
+        }
+
+        .icono-menu::before {
+            content: "";
+            position: absolute;
+            left: 1px;
+            right: 1px;
+            top: 2px;
+            border-top: 1px solid white;
+        }
+
+        .icono-menu::after {
+            content: "";
+            position: absolute;
+            left: 1px;
+            right: 1px;
+            bottom: 2px;
+            border-top: 1px solid white;
+        }
+
+        .boton-menu:hover {
+            background-color: #1e3932;
+        }
 
 .fotos{
   width: 20%;
