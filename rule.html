@@ -15,7 +15,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Ubicacion</title>
+    <title>RULETA</title>
 </head>
 <body>
 <header>
@@ -46,15 +46,14 @@
 </video>
 
 
-<li><a href="index.html">Inicio</a></li>
-<li><a href="rule.html">Ruleta</a></li>
-<li><a href="ofertas.html">Ofertas</a></li>
-<li><a href="mapa.html">Ubicacion</a></li>
+<li><a href="index.html">INICIO</a></li>
+<li><a href="mapa.html">LOCALES</a></li>
+<li><a href="ofertas.html">PROMOS EXCLUSIVAS</a></li>
+<li><a href="rule.html">RULETA</a></li>
 </ul>
 </div>
 </nav>
 </header>
-
 <script>
 const logo = document.getElementById("logoCuervo");
 const sonido = document.getElementById("sonidoCuervo");
@@ -131,7 +130,7 @@ links.forEach(link => {
 <div id="container">
 
   <div class="titulo"><h1></h1></div>
-<canvas id="matrix"></canvas>
+
 
 <div id="rouletteContainer">
 
@@ -139,7 +138,7 @@ links.forEach(link => {
 
 <canvas id="roulette"></canvas>
 
-<div id="options">
+<div id="options" style="font-family: 'Luckiest Guy', cursive;">
 
 <input placeholder="30 min gratis en PS3" readonly>
 <input placeholder="20 min extra en tu próxima visita" readonly>
@@ -160,12 +159,12 @@ links.forEach(link => {
 
 <div id="powerBar"><div id="powerFill"></div></div>
 
-<button id="spinBtn">GIRAR</button>
+<button id="spinBtn" style="font-family: 'Luckiest Guy', cursive;">GIRAR</button>
 
 </div>
 
 <div class="sprite" id="bird"></div>
-<div class="cesped" id="#"></div>
+
 </div>
 
 <div id="crack"></div>
@@ -349,11 +348,20 @@ ctx.arc(0,0,rad*.9,i*slice,(i+1)*slice)
 
 ctx.closePath()
 
-ctx.fillStyle=`hsl(${i*360/o.length},100%,50%)`
+const colores = [
+    "#FF0055", // Rosa fuerte
+    "#FFD600", // Amarillo
+    "#00C853", // Verde
+    "#2979FF", // Azul
+    "#AA00FF", // Morado
+    "#FF6D00"  // Naranja
+];
+
+ctx.fillStyle = colores[i % colores.length];
 
 ctx.fill()
 
-ctx.strokeStyle="#00ff66"
+ctx.strokeStyle="1e3932"
 
 ctx.lineWidth=rad*.015
 
@@ -543,10 +551,10 @@ continueBtn.addEventListener("touchstart",closePopup)
 
 <!-- pie de pagina  -->
 
-<footer class="pie-pagina">
+<footer class="pie-pagina" style="background-color: #1e3932;">
         <div class="grupo-1">
           <div class="box">
-                                  <figure>
+            <figure>
     <img 
         src="img/logo444.png"
         alt="ARZARO"
@@ -555,16 +563,16 @@ continueBtn.addEventListener("touchstart",closePopup)
     />
 </figure>
           </div>
-          <div class="box">
+          <div class="box" style="background-color: #1e3932;">
             <h2>¿Quiénes somos?</h2>
             <p>
-              Una empresa de videojuegos ofrece experiencias únicas de entretenimiento en consola, permitiendo a los jugadores sumergirse en mundos virtuales llenos de acción, aventura y competencia. A través de consolas de última generación, juegos variados y espacios diseñados para la comodidad, brinda la oportunidad de disfrutar solo o con amigos, vivir torneos, descubrir nuevos títulos y experimentar la emoción de jugar con el mejor rendimiento y calidad. 🎮🔥
+Es una marca creada para disfrutar momentos especiales y mucho más. Una experiencia donde el sabor, la calidad y el estilo se combinan para ofrecer algo diferente.
             </p>
             <p>
               para mas informacion comuniquese con nosotros.
             </p>
           </div>
-          <div class="box">
+          <div class="box" style="background-color: #1e3932;">
             <h2>SIGUENOS:</h2>
             <div class="redes-container">
               <ul>
@@ -600,7 +608,7 @@ continueBtn.addEventListener("touchstart",closePopup)
         </div>
         <div class="grupo-2">
           <small
-            >&copy; 2025 <b>Zona Gamer</b> - Todos los Derechos
+            >&copy; 2025 <b>ARZARO</b> - Todos los Derechos
             Reservados.</small
           >
         </div>
