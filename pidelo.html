@@ -1,809 +1,789 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <link rel="icon" href="https://cdn.glitch.global/c8ae3563-7820-43f9-9f9d-9f7a9c05c680/Sin%20t%C3%ADtuloL.png?v=1686265807779" sizes="32x32" /> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="icon" href="https://cdn.glitch.global/c8ae3563-7820-43f9-9f9d-9f7a9c05c680/Sin%20t%C3%ADtuloL.png?v=1686265807779" sizes="32x32" />
     <link rel="icon" href="https://cdn.glitch.global/c8ae3563-7820-43f9-9f9d-9f7a9c05c680/Sin%20t%C3%ADtuloL.png?v=1686265807779" sizes="592x592" />
     <link rel="apple-touch-icon" href="https://cdn.glitch.global/c8ae3563-7820-43f9-9f9d-9f7a9c05c680/Sin%20t%C3%ADtuloL.png?v=1686265807779" />
     <meta name="msapplication-TileImage" content="logo3" />
     <link rel="stylesheet" href="pidelo/estilos.css">
     <link rel="icon" href="img/ojos.ico">
-           <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="swiper.css">
     <title>Pidelo</title>
 </head>
 
 <body>
-<header>
-    <nav>
-<div class="nav-container">
-<a href="index.html" class="logo" id="logoCuervo">
-   <img src="img/logo2.png" class="xyz" alt="ARZARO">
-</a>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <a href="index.html" class="logo" id="logoCuervo">
+                    <img src="img/logo2.png" class="xyz" alt="ARZARO">
+                </a>
 
-<audio id="sonidoCuervo" preload="auto">
+
+                <!-- Botón del carrito -->
+                <div class="btn-cart">
+                    <a href="venta.html" class="cart-link" aria-label="Ver artículos seleccionados">
+                        <i class="fa-solid fa-cart-shopping icon-cart" aria-hidden="true"></i>
+                    </a>
+                    <span id="cartCount">0</span>
+                </div>
+            </div>
+
+
+
+
+            <audio id="sonidoCuervo" preload="auto">
       <source src="mp3/cuervo2.mp3" type="audio/mpeg">
    </audio>
 
-<button class="menu-btn" id="menuBtn">☰</button>
+            <button class="menu-btn" id="menuBtn">☰</button>
 
 
-   <audio id="sonidoRayo" preload="auto">
+            <audio id="sonidoRayo" preload="auto">
     <source src="mp3/rayo1.mp3" type="audio/mpeg">
 </audio>
 
-<audio id="menuMusic" loop>
+            <audio id="menuMusic" loop>
   <source src="mp3/android.mp3" type="audio/mp3">
 </audio>
 
-<ul class="nav-links" id="navLinks">
+            <ul class="nav-links" id="navLinks">
 
-  <video loop autoplay muted class="minivideo video-menu"  id="menuVideo">
+                <video loop autoplay muted class="minivideo video-menu" id="menuVideo">
   <source src="mp4/android.mp4" type="video/mp4">
 </video>
 
 
-<li><a href="index.html">Inicio</a></li>
-<li><a href="rule.html">Ruleta</a></li>
-<li><a href="ofertas.html">Ofertas</a></li>
-<li><a href="mapa.html">Ubicacion</a></li>
-</ul>
-</div>
-</nav>
-</header>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="rule.html">Ruleta</a></li>
+                <li><a href="ofertas.html">Ofertas</a></li>
+                <li><a href="mapa.html">Ubicacion</a></li>
+            </ul>
+            </div>
+        </nav>
+    </header>
+    <script src="carrito.js"></script>
+    <script>
+        const logo = document.getElementById("logoCuervo");
+        const sonido = document.getElementById("sonidoCuervo");
 
+        logo.addEventListener("click", function(event) {
+            event.preventDefault();
 
-<script>
-const logo = document.getElementById("logoCuervo");
-const sonido = document.getElementById("sonidoCuervo");
+            sonido.currentTime = 0;
 
-logo.addEventListener("click", function(event) {
-    event.preventDefault();
+            sonido.play()
+                .then(() => {
+                    console.log("Sonido OK");
 
-    sonido.currentTime = 0;
-
-    sonido.play()
-        .then(() => {
-            console.log("Sonido OK");
-
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 500);
-        })
-        .catch(error => {
-            console.error("Error de audio:", error);
-            window.location.href = "index.html";
+                    setTimeout(() => {
+                        window.location.href = "index.html";
+                    }, 500);
+                })
+                .catch(error => {
+                    console.error("Error de audio:", error);
+                    window.location.href = "index.html";
+                });
         });
-});
-</script>
+    </script>
 
-<script type="text/javascript">
-    window.addEventListener("scroll", function(){
-    var header = document.querySelector("header");
-    header.classList.toggle("abajo",window.scrollY>0);
-})
-</script>
- <!-- script del menu -->
-<script>
+    <script type="text/javascript">
+        window.addEventListener("scroll", function() {
+            var header = document.querySelector("header");
+            header.classList.toggle("abajo", window.scrollY > 0);
+        })
+    </script>
+    <!-- script del menu -->
+    <script>
+        const menuBtn = document.getElementById("menuBtn");
+        const navLinks = document.getElementById("navLinks");
+        const links = navLinks.querySelectorAll("a");
+        const music = document.getElementById("menuMusic");
 
-const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.getElementById("navLinks");
-const links = navLinks.querySelectorAll("a");
-const music = document.getElementById("menuMusic");
+        menuBtn.addEventListener("click", () => {
 
-menuBtn.addEventListener("click", () =>{
+            navLinks.classList.toggle("active");
 
-  navLinks.classList.toggle("active");
+            if (navLinks.classList.contains("active")) {
+                menuBtn.innerHTML = "✖";
+                menuBtn.setAttribute("aria-expanded", "true");
 
-  if(navLinks.classList.contains("active")){
-    menuBtn.innerHTML = "✖";
-    menuBtn.setAttribute("aria-expanded","true");
+                // reproducir musica
+                music.play();
 
-    // reproducir musica
-    music.play();
+            } else {
+                menuBtn.innerHTML = "☰";
+                menuBtn.setAttribute("aria-expanded", "false");
 
-  }else{
-    menuBtn.innerHTML = "☰";
-    menuBtn.setAttribute("aria-expanded","false");
+                // detener musica
+                music.pause();
+                music.currentTime = 0;
+            }
 
-    // detener musica
-    music.pause();
-    music.currentTime = 0;
-  }
+        });
 
-});
+        links.forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+                menuBtn.innerHTML = "☰";
+                menuBtn.setAttribute("aria-expanded", "false");
 
-links.forEach(link => {
-  link.addEventListener("click",() => {
-    navLinks.classList.remove("active");
-    menuBtn.innerHTML = "☰";
-    menuBtn.setAttribute("aria-expanded","false");
+                music.pause();
+                music.currentTime = 0;
+            })
+        });
+    </script>
 
-    music.pause();
-    music.currentTime = 0;
-  })
-});
-
-</script>
-
-<section class="anuncio">
-      <section class="tec">
-        <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="car">
-                <picture>
-                    <source media="(max-width:700px)" srcset="img/MOBILE_3__3.webp">
-                    <img src="img/DESKTOP_2__3.webp" class="banner" alt="promt" />
-                </picture>  
+    <section class="anuncio">
+        <section class="tec">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="car">
+                            <picture>
+                                <source media="(max-width:700px)" srcset="img/MOBILE_3__3.webp">
+                                <img src="img/DESKTOP_2__3.webp" class="banner" alt="promt" />
+                            </picture>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="car">
+                            <picture>
+                                <source media="(max-width:700px)" srcset="img/MOBILE_3__3.webp">
+                                <img src="img/DESKTOP_2__3.webp" class="banner" alt="promt" />
+                            </picture>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="car">
+                            <picture>
+                                <source media="(max-width:700px)" srcset="img/MOBILE_3__3.webp">
+                                <img src="img/DESKTOP_2__3.webp" class="banner" alt="promt" />
+                            </picture>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="car">
+                            <picture>
+                                <source media="(max-width:700px)" srcset="img/MOBILE_3__3.webp">
+                                <img src="img/DESKTOP_2__3.webp" class="banner" alt="promt" />
+                            </picture>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="car">
+                            <picture>
+                                <source media="(max-width:700px)" srcset="img/MOBILE_3__3.webp">
+                                <img src="img/DESKTOP_2__3.webp" class="banner" alt="promt" />
+                            </picture>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="car">
+                            <picture>
+                                <source media="(max-width:700px)" srcset="img/MOBILE_3__3.webp">
+                                <img src="img/DESKTOP_2__3.webp" class="banner" alt="promt" />
+                            </picture>
+                        </div>
+                    </div>
                 </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
             </div>
-            <div class="swiper-slide"> 
-              <div class="car">
-               <picture>
-                    <source media="(max-width:700px)" srcset="img/MOBILE_3__3.webp">
-                    <img src="img/DESKTOP_2__3.webp" class="banner" alt="promt" />
-                </picture>  
-              </div>
-            </div>
-            <div class="swiper-slide"> 
-              <div class="car">
-                     <picture>
-                    <source media="(max-width:700px)" srcset="img/MOBILE_3__3.webp">
-                    <img src="img/DESKTOP_2__3.webp" class="banner" alt="promt" />
-                </picture>  
-              </div>
-            </div>
-            <div class="swiper-slide"> 
-              <div class="car">
-                 <picture>
-                    <source media="(max-width:700px)" srcset="img/MOBILE_3__3.webp">
-                    <img src="img/DESKTOP_2__3.webp" class="banner" alt="promt" />
-                </picture>  
-              </div>
-            </div>
-            <div class="swiper-slide"> 
-              <div class="car">
-                <picture>
-                    <source media="(max-width:700px)" srcset="img/MOBILE_3__3.webp">
-                    <img src="img/DESKTOP_2__3.webp" class="banner" alt="promt" />
-                </picture>  
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="car">
-                <picture>
-                    <source media="(max-width:700px)" srcset="img/MOBILE_3__3.webp">
-                    <img src="img/DESKTOP_2__3.webp" class="banner" alt="promt" />
-                </picture>  
-              </div>
-            </div>
-          </div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </section>
-      </section>
-<script src="script.js">
-</script>
-        <script>
-            
-          var swiper = new Swiper(".mySwiper", {
+        </section>
+    </section>
+    <script src="script.js">
+    </script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
             spaceBetween: 0,
             centeredSlides: true,
             autoplay: {
-              delay: 2500,
-              disableOnInteraction: false,
+                delay: 2500,
+                disableOnInteraction: false,
             },
             pagination: {
-              el: ".swiper-pagination",
-              clickable: true,
+                el: ".swiper-pagination",
+                clickable: true,
             },
             navigation: {
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
             },
-          });
-        </script>
+        });
+    </script>
 
-<section class="conten">
+    <section class="conten" id="listProducts">
 
-    <div class="contenedor">
-<div class="pr">
-        <h1 class="titulo-principal">
-            LA MEJOR LISTA QUE CONOCERAS HOY
-        </h1>
-
-
-        <h2 class="titulo-seccion">
-            PROMOCIONES
-        </h2>
-</div>  
-
-        <div class="promociones">
+        <div class="contenedor">
+            <div class="pr">
+                <h1 class="titulo-principal">
+                    LA MEJOR LISTA QUE CONOCERAS HOY
+                </h1>
 
 
-            <!-- TARJETA 1 -->
+                <h2 class="titulo-seccion">
+                    PROMOCIONES
+                </h2>
+            </div>
 
-            <div class="card">
+            <div class="promociones">
 
-                <div class="imagen">
-                    <img src="img/bebidafrozen2.jpg" alt="">
-                </div>
 
-                <button class="corazon">
+                <!-- TARJETA 1 -->
+
+                <div class="card">
+
+                    <div class="imagen">
+                        <img src="img/sandibrocha.jpg" alt="">
+                    </div>
+
+                    <button class="corazon">
                     ♡
                 </button>
 
-                <div class="contenido">
+                    <div class="contenido">
 
-                    <h3 class="nombre">
-                        Promo Doble Queso Tocino
-                    </h3>
+                        <h3 class="nombre">
+                            Vero Mix
+                        </h3>
 
-                    <p class="descripcion">
-                        1 Doble queso tocino regular,
-                        1 papa regular, gaseosa personal.
-                    </p>
+                        <p class="descripcion">
+                            1 Doble queso tocino regular, 1 papa regular, gaseosa personal.
+                        </p>
 
-                    <div class="precios">
+                        <div class="precios">
 
-                        <span class="precio">
-                            S/19.90
+                            <span class="precio" id="currentPrice">
+                            S/4.00
                         </span>
 
-                        <span class="precio-anterior">
-                            S/34.70
+
+                            <span class="precio-anterior">
+                            S/5.50
                         </span>
 
-                        <span class="descuento">
-                            -42%
+                            <span class="descuento">
+                            -27%
                         </span>
+
+                        </div>
 
                     </div>
 
-                </div>
-
-                <button class="boton-mas">
+                    <button class="boton-mas" type="button" data-id="1">
                     +
                 </button>
 
-            </div>
-
-
-
-            <!-- TARJETA 2 -->
-
-            <div class="card">
-
-                <div class="imagen">
-                    <img src="imagenes/hamburguesa2.png" alt="">
                 </div>
 
-                <button class="corazon">
+
+
+                <!-- TARJETA 2 -->
+
+                <div class="card">
+
+                    <div class="imagen">
+                        <img src="img/peelerz.jpg" alt="">
+                    </div>
+
+                    <button class="corazon">
                     ♡
                 </button>
 
-                <div class="contenido">
+                    <div class="contenido">
 
-                    <h3 class="nombre">
-                        Dúo Imperdible
-                    </h3>
+                        <h3 class="nombre">
+                            Peelerz Gomitas Banana
+                        </h3>
 
-                    <p class="descripcion">
-                        1 Clásica regular,
-                        1 Churrita regular,
-                        2 papas regulares
-                    </p>
+                        <p class="descripcion">
+                            1 Clásica regular, 1 Churrita regular, 2 papas regulares
+                        </p>
 
-                    <div class="precios">
+                        <div class="precios">
 
-                        <span class="precio">
-                            S/19.90
+                            <span class="precio" id="currentPrice">
+                            S/5.00
                         </span>
 
-                        <span class="precio-anterior">
-                            S/45.60
+                            <span class="precio-anterior">
+                            S/7.00
                         </span>
 
-                        <span class="descuento">
-                            -56%
+                            <span class="descuento">
+                            -29%
                         </span>
+
+                        </div>
 
                     </div>
 
-                </div>
-
-                <button class="boton-mas">
+                    <button class="boton-mas" type="button" data-id="2">
                     +
                 </button>
 
-            </div>
-
-
-
-            <!-- TARJETA 3 -->
-
-            <div class="card">
-
-                <div class="imagen">
-                    <img src="imagenes/hamburguesa3.png" alt="">
                 </div>
 
-                <button class="corazon">
+
+
+                <!-- TARJETA 3 -->
+
+                <div class="card">
+
+                    <div class="imagen">
+                        <img src="img/durazno.jpg" alt="">
+                    </div>
+
+                    <button class="corazon">
                     ♡
                 </button>
 
-                <div class="contenido">
+                    <div class="contenido">
 
-                    <h3 class="nombre">
-                        Dúo Sabroso
-                    </h3>
+                        <h3 class="nombre">
+                            Peelerz Gomitas Durazno
+                        </h3>
 
-                    <p class="descripcion">
-                        2 A lo pobre regulares,
-                        2 papas regulares,
-                        2 gaseosas personales
-                    </p>
+                        <p class="descripcion">
+                            2 A lo pobre regulares, 2 papas regulares, 2 gaseosas personales
+                        </p>
 
-                    <div class="precios">
+                        <div class="precios">
 
-                        <span class="precio">
-                            S/28.90
+                            <span class="precio" id="currentPrice">
+                            S/5.00
                         </span>
 
-                        <span class="precio-anterior">
-                            S/68.40
+                            <span class="precio-anterior">
+                            S/7.00
                         </span>
 
-                        <span class="descuento">
-                            -57%
+                            <span class="descuento">
+                            -29%
                         </span>
+
+                        </div>
 
                     </div>
 
-                </div>
-
-                <button class="boton-mas">
+                    <button class="boton-mas" type="button" data-id="3">
                     +
                 </button>
 
-            </div>
-
-
-
-            <!-- TARJETA 4 -->
-
-            <div class="card">
-
-                <div class="imagen">
-                    <img src="imagenes/hamburguesa4.png" alt="">
                 </div>
 
-                <button class="corazon">
+
+
+                <!-- TARJETA 4 -->
+
+                <div class="card">
+
+                    <div class="imagen">
+                        <img src="img/20629163.jpg" alt="">
+                    </div>
+
+                    <button class="corazon">
                     ♡
                 </button>
 
-                <div class="contenido">
+                    <div class="contenido">
 
-                    <h3 class="nombre">
-                        Dúo Queso Tocino
-                    </h3>
+                        <h3 class="nombre">
+                            Peelerz Gomitas Mango
+                        </h3>
 
-                    <p class="descripcion">
-                        2 Queso Tocino regulares,
-                        2 papas regulares
-                    </p>
+                        <p class="descripcion">
+                            2 Queso Tocino regulares, 2 papas regulares
+                        </p>
 
-                    <div class="precios">
+                        <div class="precios">
 
-                        <span class="precio">
-                            S/25.90
+                            <span class="precio" id="currentPrice">
+                            S/5.00
                         </span>
 
-                        <span class="precio-anterior">
-                            S/43.60
+                            <span class="precio-anterior">
+                            S/7.00
                         </span>
 
-                        <span class="descuento">
-                            -40%
+                            <span class="descuento">
+                            -29%
                         </span>
+
+                        </div>
 
                     </div>
 
-                </div>
-
-                <button class="boton-mas">
+                    <button class="boton-mas" type="button" data-id="4">
                     +
                 </button>
 
-            </div>
-
-
-
-            <!-- TARJETA 5 -->
-
-            <div class="card">
-
-                <div class="imagen">
-                    <img src="imagenes/hamburguesa5.png" alt="">
                 </div>
 
-                <button class="corazon">
+
+
+                <!-- TARJETA 5 -->
+
+                <div class="card">
+
+                    <div class="imagen">
+                        <img src="imagenes/hamburguesa5.png" alt="">
+                    </div>
+
+                    <button class="corazon">
                     ♡
                 </button>
 
-                <div class="contenido">
+                    <div class="contenido">
 
-                    <h3 class="nombre">
-                        Personal Clásica
-                    </h3>
+                        <h3 class="nombre">
+                            Personal Clásica
+                        </h3>
 
-                    <p class="descripcion">
-                        Promoción de 1 Hamburguesa
-                        Clásica regular y 1 papa mediana
-                    </p>
+                        <p class="descripcion">
+                            Promoción de 1 Hamburguesa Clásica regular y 1 papa mediana
+                        </p>
 
-                    <div class="precios">
+                        <div class="precios">
 
-                        <span class="precio">
+                            <span class="precio" id="currentPrice">
                             S/12.90
                         </span>
 
-                        <span class="precio-anterior">
+                            <span class="precio-anterior">
                             S/21.60
                         </span>
 
-                        <span class="descuento">
+                            <span class="descuento">
                             -40%
                         </span>
 
+                        </div>
+
                     </div>
 
-                </div>
-
-                <button class="boton-mas">
+                    <button class="boton-mas" type="button" data-id="5">
                     +
                 </button>
 
-            </div>
+                </div>
 
+
+            </div>
 
         </div>
 
-    </div>
-</section>
-
-<section class="set2">
-
-    <div class="contenedor">
-<div class="pr">
-        <h2 class="titulo-seccion">
-            RECOMENDADOS PARA TI
-        </h2>
-</div>  
-        <div class="promociones">
-            <!-- TARJETA 1 -->
-
-            <div class="card">
-
-                <div class="imagen">
-                    <img src="img/bebidafrozen2.jpg" alt="">
+        <div class="set2">
+            <div class="contenedor">
+                <div class="pr">
+                    <h2 class="titulo-seccion">
+                        RECOMENDADOS PARA TI
+                    </h2>
                 </div>
+                <div class="promociones">
+                    <!-- TARJETA 1 -->
 
-                <button class="corazon">
+                    <div class="card">
+
+                        <div class="imagen">
+                            <img src="img/bebidafrozen2.jpg" alt="">
+                        </div>
+
+                        <button class="corazon">
                     ♡
                 </button>
 
-                <div class="contenido">
+                        <div class="contenido">
 
-                    <h3 class="nombre">
-                        Promo Doble Queso Tocino
-                    </h3>
+                            <h3 class="nombre">
+                                Promo Doble Queso Tocino
+                            </h3>
 
-                    <p class="descripcion">
-                        1 Doble queso tocino regular,
-                        1 papa regular, gaseosa personal.
-                    </p>
+                            <p class="descripcion">
+                                1 Doble queso tocino regular, 1 papa regular, gaseosa personal.
+                            </p>
 
-                    <div class="precios">
+                            <div class="precios">
 
-                        <span class="precio">
+                                <span class="precio" id="currentPrice">
                             S/19.90
                         </span>
 
-                        <span class="precio-anterior">
+                                <span class="precio-anterior">
                             S/34.70
                         </span>
 
-                        <span class="descuento">
+                                <span class="descuento">
                             -42%
                         </span>
 
-                    </div>
+                            </div>
 
-                </div>
+                        </div>
 
-                <button class="boton-mas">
+                        <button class="boton-mas" type="button" data-id="6">
                     +
                 </button>
 
-            </div>
+                    </div>
 
 
 
-            <!-- TARJETA 2 -->
+                    <!-- TARJETA 2 -->
 
-            <div class="card">
+                    <div class="card">
 
-                <div class="imagen">
-                    <img src="imagenes/hamburguesa2.png" alt="">
-                </div>
+                        <div class="imagen">
+                            <img src="imagenes/hamburguesa2.png" alt="">
+                        </div>
 
-                <button class="corazon">
+                        <button class="corazon">
                     ♡
                 </button>
 
-                <div class="contenido">
+                        <div class="contenido">
 
-                    <h3 class="nombre">
-                        Dúo Imperdible
-                    </h3>
+                            <h3 class="nombre">
+                                Dúo Imperdible
+                            </h3>
 
-                    <p class="descripcion">
-                        1 Clásica regular,
-                        1 Churrita regular,
-                        2 papas regulares
-                    </p>
+                            <p class="descripcion">
+                                1 Clásica regular, 1 Churrita regular, 2 papas regulares
+                            </p>
 
-                    <div class="precios">
+                            <div class="precios">
 
-                        <span class="precio">
+                                <span class="precio" id="currentPrice">
                             S/19.90
                         </span>
 
-                        <span class="precio-anterior">
+                                <span class="precio-anterior">
                             S/45.60
                         </span>
 
-                        <span class="descuento">
+                                <span class="descuento">
                             -56%
                         </span>
 
-                    </div>
+                            </div>
 
-                </div>
+                        </div>
 
-                <button class="boton-mas">
+                        <button class="boton-mas" type="button" data-id="7">
                     +
                 </button>
 
-            </div>
+                    </div>
 
 
 
-            <!-- TARJETA 3 -->
+                    <!-- TARJETA 3 -->
 
-            <div class="card">
+                    <div class="card">
 
-                <div class="imagen">
-                    <img src="imagenes/hamburguesa3.png" alt="">
-                </div>
+                        <div class="imagen">
+                            <img src="imagenes/hamburguesa3.png" alt="">
+                        </div>
 
-                <button class="corazon">
+                        <button class="corazon">
                     ♡
                 </button>
 
-                <div class="contenido">
+                        <div class="contenido">
 
-                    <h3 class="nombre">
-                        Dúo Sabroso
-                    </h3>
+                            <h3 class="nombre">
+                                Dúo Sabroso
+                            </h3>
 
-                    <p class="descripcion">
-                        2 A lo pobre regulares,
-                        2 papas regulares,
-                        2 gaseosas personales
-                    </p>
+                            <p class="descripcion">
+                                2 A lo pobre regulares, 2 papas regulares, 2 gaseosas personales
+                            </p>
 
-                    <div class="precios">
+                            <div class="precios">
 
-                        <span class="precio">
+                                <span class="precio" id="currentPrice">
                             S/28.90
                         </span>
 
-                        <span class="precio-anterior">
+                                <span class="precio-anterior">
                             S/68.40
                         </span>
 
-                        <span class="descuento">
+                                <span class="descuento">
                             -57%
                         </span>
 
-                    </div>
+                            </div>
 
-                </div>
+                        </div>
 
-                <button class="boton-mas">
+                        <button class="boton-mas" type="button" data-id="8">
                     +
                 </button>
 
-            </div>
+                    </div>
 
 
 
-            <!-- TARJETA 4 -->
+                    <!-- TARJETA 4 -->
 
-            <div class="card">
+                    <div class="card">
 
-                <div class="imagen">
-                    <img src="imagenes/hamburguesa4.png" alt="">
-                </div>
+                        <div class="imagen">
+                            <img src="imagenes/hamburguesa4.png" alt="">
+                        </div>
 
-                <button class="corazon">
+                        <button class="corazon">
                     ♡
                 </button>
 
-                <div class="contenido">
+                        <div class="contenido">
 
-                    <h3 class="nombre">
-                        Dúo Queso Tocino
-                    </h3>
+                            <h3 class="nombre">
+                                Dúo Queso Tocino
+                            </h3>
 
-                    <p class="descripcion">
-                        2 Queso Tocino regulares,
-                        2 papas regulares
-                    </p>
+                            <p class="descripcion">
+                                2 Queso Tocino regulares, 2 papas regulares
+                            </p>
 
-                    <div class="precios">
+                            <div class="precios">
 
-                        <span class="precio">
+                                <span class="precio" id="currentPrice">
                             S/25.90
                         </span>
 
-                        <span class="precio-anterior">
+                                <span class="precio-anterior">
                             S/43.60
                         </span>
 
-                        <span class="descuento">
+                                <span class="descuento">
                             -40%
                         </span>
 
-                    </div>
+                            </div>
 
-                </div>
+                        </div>
 
-                <button class="boton-mas">
+                        <button class="boton-mas" type="button" data-id="9">
                     +
                 </button>
 
-            </div>
+                    </div>
 
 
 
-            <!-- TARJETA 5 -->
+                    <!-- TARJETA 5 -->
 
-            <div class="card">
+                    <div class="card">
 
-                <div class="imagen">
-                    <img src="imagenes/hamburguesa5.png" alt="">
-                </div>
+                        <div class="imagen">
+                            <img src="imagenes/hamburguesa5.png" alt="">
+                        </div>
 
-                <button class="corazon">
+                        <button class="corazon">
                     ♡
                 </button>
 
-                <div class="contenido">
+                        <div class="contenido">
 
-                    <h3 class="nombre">
-                        Personal Clásica
-                    </h3>
+                            <h3 class="nombre">
+                                Personal Clásica
+                            </h3>
 
-                    <p class="descripcion">
-                        Promoción de 1 Hamburguesa
-                        Clásica regular y 1 papa mediana
-                    </p>
+                            <p class="descripcion">
+                                Promoción de 1 Hamburguesa Clásica regular y 1 papa mediana
+                            </p>
 
-                    <div class="precios">
+                            <div class="precios">
 
-                        <span class="precio">
+                                <span class="precio" id="currentPrice">
                             S/12.90
                         </span>
 
-                        <span class="precio-anterior">
+                                <span class="precio-anterior">
                             S/21.60
                         </span>
 
-                        <span class="descuento">
+                                <span class="descuento">
                             -40%
                         </span>
 
-                    </div>
+                            </div>
 
-                </div>
+                        </div>
 
-                <button class="boton-mas">
+                        <button class="boton-mas" type="button" data-id="10">
                     +
                 </button>
 
+                    </div>
+
+
+                </div>
+
             </div>
 
-
         </div>
-
-    </div>
-
+    </section>
 
 
+    <!-- pie de pagina  -->
 
-</section>
-<!-- pie de pagina  -->
-
-<footer class="pie-pagina">
+    <footer class="pie-pagina">
         <div class="grupo-1">
-          <div class="box">
-                                  <figure>
-    <img 
-        src="img/logo444.png"
-        alt="ARZARO"
-        id="logo444"
-        class="logo-rayo"
-    />
-</figure>
-          </div>
-          <div class="box">
-            <h2>¿Quiénes somos?</h2>
-            <p>
-              Una empresa de videojuegos ofrece experiencias únicas de entretenimiento en consola, permitiendo a los jugadores sumergirse en mundos virtuales llenos de acción, aventura y competencia. A través de consolas de última generación, juegos variados y espacios diseñados para la comodidad, brinda la oportunidad de disfrutar solo o con amigos, vivir torneos, descubrir nuevos títulos y experimentar la emoción de jugar con el mejor rendimiento y calidad. 🎮🔥
-            </p>
-            <p>
-              para mas informacion comuniquese con nosotros.
-            </p>
-          </div>
-          <div class="box">
-            <h2>SIGUENOS:</h2>
-            <div class="redes-container">
-              <ul>
-                <li>
-                  <a
-                    href="#"
-                    class="facebook"
-                    ><i class="fab fa-facebook-f"></i
-                  ></a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="instagram"
-                    ><i class="fab fa-instagram"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="#" class="twitter"
-                    ><i class="fab fa-twitter"></i
-                  ></a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="youtube"
-                    ><i class="fab fa-youtube"></i
-                  ></a>
-                </li>
-              </ul>
+            <div class="box">
+                <figure>
+                    <img src="img/logo444.png" alt="ARZARO" id="logo444" class="logo-rayo" />
+                </figure>
             </div>
-          </div>
+            <div class="box">
+                <h2>¿Quiénes somos?</h2>
+                <p>
+                    Una empresa de videojuegos ofrece experiencias únicas de entretenimiento en consola, permitiendo a los jugadores sumergirse en mundos virtuales llenos de acción, aventura y competencia. A través de consolas de última generación, juegos variados y espacios
+                    diseñados para la comodidad, brinda la oportunidad de disfrutar solo o con amigos, vivir torneos, descubrir nuevos títulos y experimentar la emoción de jugar con el mejor rendimiento y calidad. 🎮🔥
+                </p>
+                <p>
+                    para mas informacion comuniquese con nosotros.
+                </p>
+            </div>
+            <div class="box">
+                <h2>SIGUENOS:</h2>
+                <div class="redes-container">
+                    <ul>
+                        <li>
+                            <a href="#" class="facebook"><i class="fab fa-facebook-f"></i
+                  ></a>
+                        </li>
+                        <li>
+                            <a href="#" class="instagram"><i class="fab fa-instagram"></i
+                  ></a>
+                        </li>
+                        <li>
+                            <a href="#" class="twitter"><i class="fab fa-twitter"></i
+                  ></a>
+                        </li>
+                        <li>
+                            <a href="#" class="youtube"><i class="fab fa-youtube"></i
+                  ></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="grupo-2">
-          <small
-            >&copy; 2025 <b>Zona Gamer</b> - Todos los Derechos
+            <small>&copy; 2025 <b>Zona Gamer</b> - Todos los Derechos
             Reservados.</small
           >
         </div>
@@ -892,6 +872,5 @@ logo444.addEventListener("click", function () {
 });
 
 </script>
-
 </body>
 </html>

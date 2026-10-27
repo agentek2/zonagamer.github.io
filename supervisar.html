@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Administrativo</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f6ff',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+            },
+            dark: {
+              bg: '#0f172a',
+              card: '#1e293b',
+              border: '#334155',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Custom scrollbar for clean dark UI */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+  </style>
+</head>
+<body class="bg-dark-bg text-slate-100 font-sans min-h-screen flex flex-col md:flex-row antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- Sidebar Mobile Overlay -->
+  <div id="sidebarOverlay" class="fixed inset-0 bg-slate-900/60 z-20 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-30 w-64 bg-dark-card border-r border-dark-border flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+    <!-- Brand Logo -->
+    <div class="h-16 flex items-center justify-between px-6 border-b border-dark-border">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-brand-600/20 text-brand-500 rounded-lg">
+          <i data-lucide="layout-dashboard" class="w-6 h-6"></i>
+        </div>
+        <span class="font-bold text-lg text-white tracking-wide">ApexAnalytics</span>
+      </div>
+      <button id="closeSidebar" class="md:hidden text-slate-400 hover:text-white focus:outline-none">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-brand-600 text-white font-medium shadow-lg shadow-brand-600/20 transition-all">
+        <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800/60 transition-all">
+        <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+        <span>Ventas</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800/60 transition-all">
+        <i data-lucide="users" class="w-5 h-5"></i>
+        <span>Clientes</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800/60 transition-all">
+        <i data-lucide="package" class="w-5 h-5"></i>
+        <span>Productos</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800/60 transition-all">
+        <i data-lucide="settings" class="w-5 h-5"></i>
+        <span>Configuración</span>
+      </a>
+    </nav>
+
+    <!-- User Profile Badge -->
+    <div class="p-4 border-t border-dark-border">
+      <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/40 border border-slate-700/50">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="w-9 h-9 rounded-full object-cover">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-medium text-white truncate">Elena Rostova</p>
+          <p class="text-xs text-slate-400 truncate">Admin</p>
+        </div>
+        <button class="text-slate-400 hover:text-rose-400 transition-colors">
+          <i data-lucide="log-out" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+    <!-- Header -->
+    <header class="h-16 bg-dark-card border-b border-dark-border flex items-center justify-between px-4 sm:px-6 z-10">
+      <div class="flex items-center gap-4">
+        <button id="openSidebar" class="md:hidden text-slate-400 hover:text-white focus:outline-none p-1.5 rounded-lg hover:bg-slate-800">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+        <h1 class="text-xl font-bold text-white tracking-tight">Panel de Control</h1>
+      </div>
+
+      <!-- Right Header Actions -->
+      <div class="flex items-center gap-3">
+        <!-- Period Filter -->
+        <div class="relative">
+          <select id="periodSelect" class="bg-slate-800 border border-slate-700 text-slate-200 text-sm rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 block p-2 pr-8 appearance-none cursor-pointer outline-none transition-all">
+            <option value="mes">Este Mes</option>
+            <option value="trimestre">Este Trimestre</option>
+            <option value="anio">Este Año</option>
+          </select>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+        </div>
+
+        <!-- Notifications button -->
+        <button class="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors relative">
+          <i data-lucide="bell" class="w-5 h-5"></i>
+          <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-brand-500 rounded-full animate-pulse"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Body Container -->
+    <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6">
+      
+      <!-- KPI Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        
+        <!-- KPI 1: Ventas -->
+        <div class="bg-dark-card p-5 rounded-xl border border-dark-border hover:border-slate-600 transition-all duration-300 shadow-sm hover:shadow-lg group">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Ventas Totales</p>
+              <h3 id="kpiVentas" class="text-2xl font-bold text-white mt-1.5 transition-all">1,248</h3>
+            </div>
+            <div class="p-2.5 rounded-lg bg-emerald-500/10 text-emerald-400 group-hover:scale-110 transition-transform">
+              <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center gap-1.5 text-xs">
+            <span class="text-emerald-400 font-semibold flex items-center gap-0.5">
+              <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> +12.5%
+            </span>
+            <span class="text-slate-500">vs periodo anterior</span>
+          </div>
+        </div>
+
+        <!-- KPI 2: Ingresos -->
+        <div class="bg-dark-card p-5 rounded-xl border border-dark-border hover:border-slate-600 transition-all duration-300 shadow-sm hover:shadow-lg group">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Ingresos Totales</p>
+              <h3 id="kpiIngresos" class="text-2xl font-bold text-white mt-1.5 transition-all">$42,850</h3>
+            </div>
+            <div class="p-2.5 rounded-lg bg-brand-500/10 text-brand-400 group-hover:scale-110 transition-transform">
+              <i data-lucide="dollar-sign" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center gap-1.5 text-xs">
+            <span class="text-emerald-400 font-semibold flex items-center gap-0.5">
+              <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> +8.2%
+            </span>
+            <span class="text-slate-500">vs periodo anterior</span>
+          </div>
+        </div>
+
+        <!-- KPI 3: Nuevos Usuarios -->
+        <div class="bg-dark-card p-5 rounded-xl border border-dark-border hover:border-slate-600 transition-all duration-300 shadow-sm hover:shadow-lg group">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Nuevos Usuarios</p>
+              <h3 id="kpiUsuarios" class="text-2xl font-bold text-white mt-1.5 transition-all">384</h3>
+            </div>
+            <div class="p-2.5 rounded-lg bg-purple-500/10 text-purple-400 group-hover:scale-110 transition-transform">
+              <i data-lucide="user-plus" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center gap-1.5 text-xs">
+            <span class="text-emerald-400 font-semibold flex items-center gap-0.5">
+              <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> +5.4%
+            </span>
+            <span class="text-slate-500">vs periodo anterior</span>
+          </div>
+        </div>
+
+        <!-- KPI 4: Tasa de Conversión -->
+        <div class="bg-dark-card p-5 rounded-xl border border-dark-border hover:border-slate-600 transition-all duration-300 shadow-sm hover:shadow-lg group">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Tasa Conversión</p>
+              <h3 id="kpiConversion" class="text-2xl font-bold text-white mt-1.5 transition-all">3.42%</h3>
+            </div>
+            <div class="p-2.5 rounded-lg bg-amber-500/10 text-amber-400 group-hover:scale-110 transition-transform">
+              <i data-lucide="target" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center gap-1.5 text-xs">
+            <span class="text-rose-400 font-semibold flex items-center gap-0.5">
+              <i data-lucide="trending-down" class="w-3.5 h-3.5"></i> -0.8%
+            </span>
+            <span class="text-slate-500">vs periodo anterior</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Charts Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Sales Trend Line Chart (Takes 2 Columns on LG) -->
+        <div class="lg:col-span-2 bg-dark-card p-5 sm:p-6 rounded-xl border border-dark-border flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h2 class="text-base font-bold text-white">Tendencia de Ventas</h2>
+              <p class="text-xs text-slate-400">Evolución del volumen de ventas</p>
+            </div>
+            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">
+              Tiempo Real
+            </span>
+          </div>
+          <div class="relative w-full h-72">
+            <canvas id="lineChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Category Doughnut Chart (Takes 1 Column on LG) -->
+        <div class="bg-dark-card p-5 sm:p-6 rounded-xl border border-dark-border flex flex-col justify-between">
+          <div class="mb-4">
+            <h2 class="text-base font-bold text-white">Ventas por Categoría</h2>
+            <p class="text-xs text-slate-400">Distribución de ingresos por producto</p>
+          </div>
+          <div class="relative w-full h-72 flex items-center justify-center">
+            <canvas id="doughnutChart"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Mobile Sidebar Elements
+    const sidebar = document.getElementById('sidebar');
+    const openSidebarBtn = document.getElementById('openSidebar');
+    const closeSidebarBtn = document.getElementById('closeSidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    function openSidebar() {
+      sidebar.classList.remove('-translate-x-full');
+      sidebarOverlay.classList.remove('hidden');
+    }
+
+    function closeSidebar() {
+      sidebar.classList.add('-translate-x-full');
+      sidebarOverlay.classList.add('hidden');
+    }
+
+    openSidebarBtn?.addEventListener('click', openSidebar);
+    closeSidebarBtn?.addEventListener('click', closeSidebar);
+    sidebarOverlay?.addEventListener('click', closeSidebar);
+
+    // Dynamic Datasets for Filter
+    const dashboardData = {
+      mes: {
+        kpis: { ventas: "1,248", ingresos: "$42,850", usuarios: "384", conversion: "3.42%" },
+        lineLabels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
+        lineData: [280, 340, 290, 338],
+        doughnutData: [45, 25, 20, 10]
+      },
+      trimestre: {
+        kpis: { ventas: "3,890", ingresos: "$128,400", usuarios: "1,120", conversion: "3.65%" },
+        lineLabels: ['Enero', 'Febrero', 'Marzo'],
+        lineData: [1150, 1420, 1320],
+        doughnutData: [40, 30, 18, 12]
+      },
+      anio: {
+        kpis: { ventas: "16,420", ingresos: "$540,200", usuarios: "4,850", conversion: "3.80%" },
+        lineLabels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        lineData: [1100, 1250, 1400, 1300, 1500, 1700, 1600, 1800, 1750, 1900, 2100, 2320],
+        doughnutData: [50, 20, 18, 12]
+      }
+    };
+
+    // Chart.js Default Settings for Dark Mode
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
+
+    // Initialize Line Chart
+    const ctxLine = document.getElementById('lineChart').getContext('2d');
+    const lineGradient = ctxLine.createLinearGradient(0, 0, 0, 280);
+    lineGradient.addColorStop(0, 'rgba(59, 130, 246, 0.4)');
+    lineGradient.addColorStop(1, 'rgba(59, 130, 246, 0.0)');
+
+    const lineChart = new Chart(ctxLine, {
+      type: 'line',
+      data: {
+        labels: dashboardData.mes.lineLabels,
+        datasets: [{
+          label: 'Ventas',
+          data: dashboardData.mes.lineData,
+          borderColor: '#3b82f6',
+          borderWidth: 3,
+          fill: true,
+          backgroundColor: lineGradient,
+          tension: 0.4,
+          pointBackgroundColor: '#3b82f6',
+          pointBorderColor: '#0f172a',
+          pointBorderWidth: 2,
+          pointRadius: 4,
+          pointHoverRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            grid: { display: false, drawBorder: false }
+          },
+          y: {
+            grid: { color: '#334155', borderDash: [4, 4] },
+            border: { dash: [4, 4] },
+            ticks: { precision: 0 }
+          }
+        }
+      }
+    });
+
+    // Initialize Doughnut Chart
+    const ctxDoughnut = document.getElementById('doughnutChart').getContext('2d');
+    const doughnutChart = new Chart(ctxDoughnut, {
+      type: 'doughnut',
+      data: {
+        labels: ['Electrónica', 'Ropa', 'Hogar', 'Otros'],
+        datasets: [{
+          data: dashboardData.mes.doughnutData,
+          backgroundColor: [
+            '#3b82f6', // Brand Blue
+            '#8b5cf6', // Purple
+            '#10b981', // Emerald
+            '#f59e0b'  // Amber
+          ],
+          borderWidth: 4,
+          borderColor: '#1e293b',
+          hoverOffset: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              usePointStyle: true,
+              padding: 16,
+              font: { size: 12 }
+            }
+          }
+        },
+        cutout: '70%'
+      }
+    });
+
+    // Handle Period Change / Filter Logic
+    const periodSelect = document.getElementById('periodSelect');
+    periodSelect.addEventListener('change', (e) => {
+      const selected = e.target.value;
+      const data = dashboardData[selected];
+
+      // Update KPI text values
+      document.getElementById('kpiVentas').textContent = data.kpis.ventas;
+      document.getElementById('kpiIngresos').textContent = data.kpis.ingresos;
+      document.getElementById('kpiUsuarios').textContent = data.kpis.usuarios;
+      document.getElementById('kpiConversion').textContent = data.kpis.conversion;
+
+      // Update Line Chart
+      lineChart.data.labels = data.lineLabels;
+      lineChart.data.datasets[0].data = data.lineData;
+      lineChart.update();
+
+      // Update Doughnut Chart
+      doughnutChart.data.datasets[0].data = data.doughnutData;
+      doughnutChart.update();
+    });
+  </script>
+</body>
+</html>
