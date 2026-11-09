@@ -237,6 +237,7 @@
 
         let angle = 0
         let speed = 0.002
+        const idleSpeed = -0.00035
         let extraSpeed = 0
         let friction = 0.985
 
@@ -330,7 +331,7 @@
 
             if (!paused) {
 
-                angle += speed + extraSpeed
+                angle += forceSpin ? speed + extraSpeed : idleSpeed
 
                 extraSpeed *= friction
 
