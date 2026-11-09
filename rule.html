@@ -128,10 +128,11 @@
         });
     </script>
     <section class="aqui">
+        <canvas id="matrix" aria-hidden="true"></canvas>
         <div id="container">
 
             <div class="titulo">
-                <h1></h1>
+                <h1>RULETA <span>GIRA Y GANA GRANDES PREMIOS</span></h1>
             </div>
 
 
@@ -164,7 +165,7 @@
                     <div id="powerFill"></div>
                 </div>
 
-                <button id="spinBtn" style="font-family: 'Luckiest Guy', cursive;">GIRAR</button>
+                <button id="spinBtn" type="button" style="font-family: 'Luckiest Guy', cursive;"><span aria-hidden="true">⟳</span> GIRAR</button>
 
             </div>
 
@@ -249,8 +250,10 @@
 
             const size = Math.min(rect.width, rect.height)
 
-            r.width = size
-            r.height = size
+            if (!size) return
+
+            r.width = Math.round(size)
+            r.height = Math.round(size)
 
         }
 
@@ -270,53 +273,58 @@
 
 
 
-        function drawText(text, rad) {
-
-            let words = text.split(" ")
-
-            let lines = []
-
+        function drawText(text, rad, index, slice) {
+            const icon = /dorito/i.test(text) ? "◆" : /otra vez/i.test(text) ? "↻" : /ganaste/i.test(text) ? "★" : /gratis|extra|hora|min/i.test(text) ? "⏱" : "🎮"
+            const fontSize = Math.max(10, Math.min(17, rad * .056))
+            const lineHeight = fontSize * 1.12
+            const maxWidth = rad * .34
+            const lines = []
             let line = ""
 
-            ctx.font = rad * .09 + "px monospace"
-
-            let maxWidth = rad * .7
-
-            for (let n = 0; n < words.length; n++) {
-
-                let test = line + words[n] + " "
-
-                let w = ctx.measureText(test).width
-
-                if (w > maxWidth && n > 0) {
-
+            ctx.font = `700 ${fontSize}px Arial, sans-serif`
+            text.split(/\s+/).forEach(word => {
+                const candidate = line ? `${line} ${word}` : word
+                if (line && ctx.measureText(candidate).width > maxWidth) {
                     lines.push(line)
-
-                    line = words[n] + " "
-
+                    line = word
                 } else {
-
-                    line = test
-
+                    line = candidate
                 }
-
-            }
-
-            lines.push(line)
-
-            lines.forEach((l, i) => {
-
-                ctx.fillText(l.trim(), rad * .55, (i * rad * .09))
-
             })
+            if (line) lines.push(line)
 
+            ctx.save()
+            ctx.rotate(index * slice + slice / 2)
+            ctx.translate(rad * .65, 0)
+            ctx.rotate(Math.PI / 2)
+            ctx.textAlign = "center"
+            ctx.textBaseline = "middle"
+            ctx.lineJoin = "round"
+            ctx.lineWidth = Math.max(2, fontSize * .22)
+            ctx.strokeStyle = "rgba(0, 12, 7, .92)"
+            ctx.fillStyle = "#ffffff"
+            ctx.shadowColor = "rgba(0, 0, 0, .9)"
+            ctx.shadowBlur = 4
+
+            const textHeight = lines.length * lineHeight
+            const firstLineY = -textHeight / 2 + lineHeight / 2 + fontSize * .55
+            ctx.font = `${fontSize + 2}px Arial, sans-serif`
+            ctx.strokeText(icon, 0, firstLineY - lineHeight * .8, maxWidth)
+            ctx.fillText(icon, 0, firstLineY - lineHeight * .8, maxWidth)
+            ctx.font = `700 ${fontSize}px Arial, sans-serif`
+            lines.forEach((lineText, lineIndex) => {
+                const y = firstLineY + lineIndex * lineHeight
+                ctx.strokeText(lineText, 0, y, maxWidth)
+                ctx.fillText(lineText, 0, y, maxWidth)
+            })
+            ctx.restore()
         }
 
         function draw() {
 
             const o = opts()
 
-            const rad = r.width / 2
+            const rad = Math.min(r.width, r.height) / 2
 
             ctx.clearRect(0, 0, r.width, r.height)
 
@@ -336,6 +344,11 @@
 
             }
 
+            if (!o.length) {
+                requestAnimationFrame(draw)
+                return
+            }
+
             ctx.save()
 
             ctx.translate(rad, rad)
@@ -343,6 +356,7 @@
             ctx.rotate(angle)
 
             const slice = Math.PI * 2 / o.length
+            const colores = ["#f52e58", "#ffd735", "#19d875", "#218cff", "#bd58f5", "#ff8738", "#12c9bf", "#ec4e9e", "#9acb35", "#6678f4"]
 
             o.forEach((t, i) => {
 
@@ -354,39 +368,55 @@
 
                 ctx.closePath()
 
-                const colores = [
-                    "#FF0055", // Rosa fuerte
-                    "#FFD600", // Amarillo
-                    "#00C853", // Verde
-                    "#2979FF", // Azul
-                    "#AA00FF", // Morado
-                    "#FF6D00" // Naranja
-                ];
-
-                ctx.fillStyle = colores[i % colores.length];
+                ctx.fillStyle = colores[i % colores.length]
 
                 ctx.fill()
 
-                ctx.strokeStyle = "1e3932"
+                ctx.strokeStyle = "rgba(2, 20, 11, .9)"
 
-                ctx.lineWidth = rad * .015
+                ctx.lineWidth = Math.max(2, rad * .012)
 
                 ctx.stroke()
 
                 ctx.save()
 
-                ctx.rotate(i * slice + slice / 2)
-
-                ctx.fillStyle = "#000"
-
-                ctx.textAlign = "center"
-
-                drawText(t, rad)
+                drawText(t, rad, i, slice)
 
                 ctx.restore()
 
             })
 
+            ctx.restore()
+
+            // El centro y las luces permanecen fijos mientras giran los premios.
+            ctx.save()
+            ctx.translate(rad, rad)
+            ctx.beginPath()
+            ctx.arc(0, 0, rad * .145, 0, Math.PI * 2)
+            ctx.fillStyle = "#03180d"
+            ctx.fill()
+            ctx.lineWidth = Math.max(3, rad * .025)
+            ctx.strokeStyle = "#83ff52"
+            ctx.shadowColor = "#22ff45"
+            ctx.shadowBlur = rad * .12
+            ctx.stroke()
+            ctx.shadowBlur = 0
+            ctx.fillStyle = "#c5ff5a"
+            ctx.textAlign = "center"
+            ctx.textBaseline = "middle"
+            ctx.font = `bold ${rad * .12}px Arial, sans-serif`
+            ctx.fillText("♛", 0, 0)
+
+            for (let led = 0; led < 40; led++) {
+                const ledAngle = led * Math.PI * 2 / 40
+                const pulse = .58 + .42 * Math.sin(performance.now() / 240 + led * .7)
+                ctx.beginPath()
+                ctx.arc(Math.cos(ledAngle) * rad * .96, Math.sin(ledAngle) * rad * .96, Math.max(2, rad * .012), 0, Math.PI * 2)
+                ctx.fillStyle = `rgba(157, 255, 98, ${pulse})`
+                ctx.shadowColor = "#39ff42"
+                ctx.shadowBlur = rad * .055
+                ctx.fill()
+            }
             ctx.restore()
 
             requestAnimationFrame(draw)
@@ -416,7 +446,7 @@
 
         function iniciarFuerza() {
 
-            if (bloqueado) return
+            if (bloqueado || cargando || btn.disabled) return
 
             clearTimeout(waitTimer)
 
@@ -462,51 +492,39 @@
 
             spinSound.currentTime = 0
 
-            spinSound.play()
+            spinSound.play().catch(() => {})
 
-            const desbloquear = setInterval(() => {
-
-                if (!forceSpin && extraSpeed < 0.0001) {
-
-                    bloqueado = false
-
-                    btn.disabled = false
-
-                    clearInterval(desbloquear)
-
-                }
-
-            }, 100)
 
         }
 
-        btn.addEventListener("mousedown", e => {
+        btn.addEventListener("pointerdown", e => {
             e.preventDefault();
+            if (btn.disabled || cargando || bloqueado) return
+            btn.setPointerCapture(e.pointerId)
             iniciarFuerza();
         });
 
-        btn.addEventListener("mouseup", () => {
+        btn.addEventListener("pointerup", () => {
             soltarFuerza();
         });
 
-        btn.addEventListener("mouseleave", () => {
+        btn.addEventListener("pointercancel", () => {
             if (cargando) soltarFuerza();
         });
 
-        btn.addEventListener("touchstart", e => {
-            e.preventDefault();
-            iniciarFuerza();
-        }, {
-            passive: false
-        });
+        btn.addEventListener("keydown", e => {
+            if ((e.key === " " || e.key === "Enter") && !e.repeat) {
+                e.preventDefault()
+                iniciarFuerza()
+            }
+        })
 
-        btn.addEventListener("touchend", () => {
-            soltarFuerza();
-        });
-
-        btn.addEventListener("touchcancel", () => {
-            if (cargando) soltarFuerza();
-        });
+        btn.addEventListener("keyup", e => {
+            if (e.key === " " || e.key === "Enter") {
+                e.preventDefault()
+                soltarFuerza()
+            }
+        })
 
         function winner() {
 
@@ -561,6 +579,8 @@
 
             waitTimer = setTimeout(() => {
                 paused = false
+                bloqueado = false
+                btn.disabled = false
             }, 2000)
 
         }
